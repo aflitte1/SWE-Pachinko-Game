@@ -1,0 +1,24 @@
+- Project Ideas
+    - Website that can take data as input and graph the data in a useful way for resarchers
+    - The website should have the ability to sort through the graphs dependent on the variables desired by the end user
+    - We will be using a Machine Learning algorithm playing the game Pachinko as a way to provide example data to the website
+- Potential Users
+    - Researchers and Data scientists
+- Possible Functionality & Non Functionality Requirements
+    - Organize data on website by key features
+    - Interactive Website (can run the code from the website and see the GUI for the Pachinco Game)
+    Graphical Data Examples
+    - TensorBoard Viszualization   
+- Scheduling and Planning
+    - Alex
+        - ML background
+    - Christian
+        - Researching website frontend librarys and Tensor Flow
+    - Dan
+        - Researching website frontend librarys and Tensor Flow
+    - Keenan
+        - Researching website frontend librarys and Tensor Flow
+
+- Ideas
+    - Tensor Flow Library
+    - Stable Baselines 3 (ML Library)
