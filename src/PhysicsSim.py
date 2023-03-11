@@ -8,6 +8,7 @@ def create_apple(space, pos):
     # body.position = (400, 0)
     body.position = pos
     shape = pymunk.Circle(body, 80)  # Pass in body and radius
+    shape.elasticity = 1
     space.add(body, shape)
     return shape
 
@@ -24,6 +25,7 @@ def static_ball(space, pos):
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
     body.position = pos
     shape = pymunk.Circle(body, 50)
+    shape.elasticity = 0.5 
     space.add(body, shape)
     return shape
 
@@ -42,7 +44,7 @@ clock = pygame.time.Clock()  # Creates a game clock
 space = pymunk.Space()  # Creates physical space
 space.gravity = (0, 500)  # gravity(horizontal gravity, vertical gravity)
 
-apple_surface = pygame.image.load('SWE-Pachinko-Game/assets/base_ball.png')
+apple_surface = pygame.image.load('assets/base_ball.png')
 apple_surface = pygame.transform.rotozoom(apple_surface, 0, 0.2)
 apples = []
 
