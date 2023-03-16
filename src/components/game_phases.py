@@ -13,28 +13,22 @@ def main_menu_phase():
 
 
 def level_one():
-    # Pysics Space Setup
-    # space = pymunk.Space()
-    # space.gravity = (0, 500) # X gravity, Y gravity
-    # space.step(1/50) # Updating time for physics sim
-
     # Background Image Setup
-    BackGround.IMAGE = Background('assets/Number_1.png', [0, 0], 1.5) # The background image will eventually become a global variable dependent on cosmetics
+    # The background image will eventually become a global variable dependent on cosmetics
+    BackGround.IMAGE = Background('assets/1.jpg', [0, 0], 1.0)
+    space.gravity = (0, 800)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.exit()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            Balls.append(create_ball(space, event.pos))
-    
-    # draw_ball(Screen, Balls, BallSurface.SURFACE)
-    
 def level_two():
-    BackGround.IMAGE = Background('assets/Number_2.png', [0, 0], 1.5)
+    BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
+    space.gravity = (0, 500)
 
-# def level_three():
+def level_three():
+    BackGround.IMAGE = Background('assets/3.jpg', [0, 0], 1.5)
+    space.gravity = (0, 100)
 
-# def level_four():
+def level_four():
+    BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
+    space.gravity = (0, 450)
 
-# def cos_menu():
+def cos_menu():
+    BackGround.IMAGE = Background('assets/cosmetic.jpg', [0, 0], 1.5)
