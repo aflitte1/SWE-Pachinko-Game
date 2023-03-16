@@ -23,7 +23,7 @@ pegs.append(bnd.create_peg(space, (500, 500)))
 pegs.append(bnd.create_peg(space, (250, 600)))
 
 
-def draw_apples(balls):
+def draw_ball(balls):
     for ball in balls:
         pos_x = int(ball.body.position.x)
         pos_y = int(ball.body.position.y)
@@ -31,7 +31,7 @@ def draw_apples(balls):
         screen.blit(ball_surface, apple_rect)
 
 
-def draw_static_ball(pegs,):
+def draw_static_peg(pegs):
     for peg in pegs:
         pos_x = int(peg.body.position.x)
         pos_y = int(peg.body.position.y)
@@ -50,8 +50,8 @@ while True:  # Game Start (We can implement a quit button if we wanted)
     # This sets the background color. Im curious if we can just imput and image
     screen.fill((217, 217, 217))
     screen.blit(BackGround.image, BackGround.rect)
-    draw_apples(balls)
-    draw_static_ball(pegs)
-    space.step(1/50)  # Updating time for bgndics sim
-    pygame. display.update()  # Renders the frame
+    draw_ball(balls)
+    draw_static_peg(pegs)
+    space.step(1/50)  # Updating time for physics sim
+    pygame.display.update()  # Renders the frame
     clock.tick(120)  # Sets the game FPS
