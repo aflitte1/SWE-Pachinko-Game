@@ -7,21 +7,21 @@ import components.game_phases as GamePhases
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
 Clock = pygame.time.Clock()
-space = pymunk.Space()
-space.gravity = (0, 500)  # X gravity, Y gravity
+Space = pymunk.Space()
+Space.gravity = (0, 500)  # X gravity, Y gravity
 
 
 def update_game_display():
     pygame.display.update()
     Clock.tick(120)
-    space.step(1/50)  # Updating time for physics sim
+    Space.step(1/50)  # Updating time for physics sim
 
 
 def main():
-    Balls = []
+    balls = []
     while True:
-        for even in pygame.event.get():
-            if even.type == pygame.QUIT:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
@@ -33,7 +33,7 @@ def main():
 
                 for event in pygame.event.get():
                     if event.type == pygame.MOUSEBUTTONDOWN:
-                        Balls.append(bnd.create_ball(space, event.pos))
+                        balls.append(bnd.create_ball(Space, event.pos))
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
 
@@ -45,7 +45,7 @@ def main():
             
         Screen.fill((217, 217, 217))
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
-        bnd.draw_ball(Screen, Balls)
+        bnd.draw_ball(Screen, balls)
         update_game_display()
 
 

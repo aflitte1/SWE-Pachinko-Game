@@ -64,4 +64,4 @@ class BackGround:
 
 
 class BallSurface:
-    SURFACE = ball_look('assets/base_ball.png', 0.15)
+    SURFACE = ball_look('assets/base_ball.png', 0.2)
