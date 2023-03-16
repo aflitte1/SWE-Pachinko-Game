@@ -1,1 +1,2 @@
-_pycache_/*
+src/__pycache__
+src/componenets/__pycache__
