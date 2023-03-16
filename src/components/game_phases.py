@@ -2,23 +2,33 @@ import sys
 import pymunk
 import pygame
 from Game import *
-import components.Backend as bnd
+from components.Backend import *
+
 
 def main_menu_phase():
-    BackGround = bnd.Background('assets/mm_background.jpg', [0, 0], 1.5)
-    screen.blit(BackGround.image, BackGround.rect)
+    BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
     for event in pygame.event.get():
         if event.type == pygame.KEYUP:
-            bnd.GlobalState.GAME_STATE = bnd.GameStatus.LEVEL_1
+            GlobalState.GAME_STATE = GameStatus.LEVEL_1
+
 
 def level_one():
-    BackGround = bnd.Background('assets/base_ball.png', [0, 0], 1.5)
-    screen.blit(BackGround.image, BackGround.rect)
+    # Background Image Setup
+    # The background image will eventually become a global variable dependent on cosmetics
+    BackGround.IMAGE = Background('assets/1.jpg', [0, 0], 1.0)
+    space.gravity = (0, 800)
 
-# def level_two():
+def level_two():
+    BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
+    space.gravity = (0, 500)
 
-# def level_three():
+def level_three():
+    BackGround.IMAGE = Background('assets/3.jpg', [0, 0], 1.5)
+    space.gravity = (0, 100)
 
-# def level_four():
+def level_four():
+    BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
+    space.gravity = (0, 450)
 
-# def cos_menu():
+def cos_menu():
+    BackGround.IMAGE = Background('assets/cosmetic.jpg', [0, 0], 1.5)
