@@ -12,6 +12,12 @@ Clock = pygame.time.Clock()
 Space = pymunk.Space()
 Space.gravity = (0, 500)  # X gravity, Y gravity
 
+# Sprite Setup
+P1 = Player()
+
+all_sprites = pygame.sprite.Group()
+all_sprites.add(P1)
+
 
 def update_game_display():
     pygame.display.update()
@@ -38,14 +44,17 @@ def main():
                 ball_max = 50
                 GamePhases.level_one()
                 if not level_start:
-                    Pegs.append(bnd.create_peg(space, (500, 500)))
+                    Pegs.append(bnd.create_peg(Space, (500, 500)))
                     level_start = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 50)
                     if spawn_ball == 0:
-                        Balls.append(bnd.create_ball(space, (400, 0)))
+                        Balls.append(bnd.create_ball(Space, (400, 0)))
                         ball_count += 1
+
+                P1.update()
+                P1.draw()
 
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
