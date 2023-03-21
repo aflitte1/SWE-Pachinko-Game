@@ -1,8 +1,10 @@
 import pygame
 import pymunk
 import sys
+import numpy as np
 import components.Backend as bnd
 import components.game_phases as GamePhases
+from components.player import *
 
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
@@ -18,7 +20,10 @@ def update_game_display():
 
 
 def main():
-    balls = []
+    Balls = []
+    Pegs = []
+    ball_count = 0
+    level_start = False
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -28,12 +33,20 @@ def main():
         match bnd.GlobalState.GAME_STATE:
             case bnd.GameStatus.MAIN_MENU:
                 GamePhases.main_menu_phase()
-            case bnd.GameStatus.LEVEL_1:
-                GamePhases.level_one()
 
-                for event in pygame.event.get():
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        balls.append(bnd.create_ball(Space, event.pos))
+            case bnd.GameStatus.LEVEL_1:
+                ball_max = 50
+                GamePhases.level_one()
+                if not level_start:
+                    Pegs.append(bnd.create_peg(Space, (500, 500)))
+                    level_start = True
+
+                if ball_count <= ball_max:
+                    spawn_ball = np.random.randint(0, 50)
+                    if spawn_ball == 0:
+                        Balls.append(bnd.create_ball(Space, (400, 0)))
+                        ball_count += 1
+
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
 
@@ -42,10 +55,11 @@ def main():
 
             case bnd.GameStatus.LEVEL_4:
                 GamePhases.cos_menu()
-            
+
         Screen.fill((217, 217, 217))
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
-        bnd.draw_ball(Screen, balls)
+        bnd.draw_ball(Screen, Balls)
+        bnd.draw_peg(Screen, Pegs)
         update_game_display()
 
 
