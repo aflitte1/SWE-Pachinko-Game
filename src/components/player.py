@@ -10,13 +10,13 @@ WIDTH = 800
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('assets/bucket.png').convert_alpha()
+        self.image = pygame.image.load('assets/bucket.png')
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
-        self.pos = vec((180, 550))
+        self.pos = vec((400, 400))
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
-        self.player_position = vec(0, 0)
+        self.player_position = vec(400, 400)
 
     def move(self):
         self.acc = vec(0, 0)

@@ -37,6 +37,14 @@ def create_peg(space, pos):
     return shape
 
 
+def draw_peg(screen, pegs):
+    for peg in pegs:
+        pos_x = int(peg.body.position.x)
+        pos_y = int(peg.body.position.y)
+        peg_rect = PegSurface.SURFACE.get_rect(center=(pos_x, pos_y))
+        screen.blit(PegSurface.SURFACE, peg_rect)
+
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location, scale):
         pygame.sprite.Sprite.__init__(self)
@@ -65,3 +73,7 @@ class BackGround:
 
 class BallSurface:
     SURFACE = ball_look('assets/base_ball.png', 0.15)
+
+
+class PegSurface:
+    SURFACE = ball_look('assets/peg.png', 0.28)

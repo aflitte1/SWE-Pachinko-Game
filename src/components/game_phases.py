@@ -3,13 +3,6 @@ import pymunk
 import pygame
 from Game import *
 from components.Backend import *
-from components.player import *
-
-# Sprite Setup
-P1 = Player()
-
-all_sprites = pygame.sprite.Group()
-all_sprites.add(P1)
 
 
 def main_menu_phase():
@@ -24,8 +17,6 @@ def level_one():
     # The background image will eventually become a global variable dependent on cosmetics
     BackGround.IMAGE = Background('assets/1.jpg', [0, 0], 1.0)
     space.gravity = (0, 800)
-    P1.update()
-    P1.draw(Screen)
 
 
 def level_two():
