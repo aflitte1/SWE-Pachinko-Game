@@ -30,6 +30,7 @@ def main():
     Pegs = []
     ball_count = 0
     level_start = False
+    bnd.create_borders(Space)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,18 +42,20 @@ def main():
                 GamePhases.main_menu_phase()
 
             case bnd.GameStatus.LEVEL_1:
+                Space.gravity = (0, 100)
                 ball_max = 50
                 if not level_start:
                     GamePhases.level_one()
                     for i in range(20):
                         x_pos = np.random.uniform(20, 780)
                         y_pos = np.random.uniform(40, 700)
-                        Pegs.append(bnd.create_peg(Space, (x_pos, y_pos), 25, 0.5))
+                        Pegs.append(bnd.create_peg(
+                            Space, (x_pos, y_pos), 25, 0.5))
                         i += 1
                     level_start = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 500)
+                    spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
                         Balls.append(bnd.create_ball(Space, (x_pos, 0), 40, 2))

@@ -44,6 +44,22 @@ def draw_peg(screen, pegs):
         screen.blit(PegSurface.SURFACE, peg_rect)
 
 
+def create_rectangle_static(space, pos_x, pos_y, width, height):
+
+    body = pymunk.Body(body_type=pymunk.Body.STATIC)
+
+    body.position = (pos_x, pos_y)
+    shape = pymunk.Poly.create_box(body, (width, height))
+    shape.elasticity = 0.1
+    space.add(body, shape)
+
+
+def create_borders(space):
+    # create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
+    create_rectangle_static(space, -100, 400, 200, 800)  # left wall
+    create_rectangle_static(space, 899, 400, 200, 800)  # right wall
+
+
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location, scale):
         pygame.sprite.Sprite.__init__(self)
