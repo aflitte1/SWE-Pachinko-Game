@@ -4,12 +4,11 @@ import pymunk
 from enum import Enum
 
 
-def create_ball(space, pos):
+def create_ball(space, pos, size, elastic):
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
-    # body.position = (400, 0)
     body.position = pos
-    shape = pymunk.Circle(body, 80)  # Pass in body and radius
-    shape.elasticity = 1
+    shape = pymunk.Circle(body, size)  # Pass in body and radius
+    shape.elasticity = elastic
     space.add(body, shape)
     return shape
 
@@ -28,11 +27,11 @@ def ball_look(file_name, scale) -> pygame.SurfaceType:
     return surface
 
 
-def create_peg(space, pos):
+def create_peg(space, pos, size, elastic):
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
     body.position = pos
-    shape = pymunk.Circle(body, 50)
-    shape.elasticity = 0.5
+    shape = pymunk.Circle(body, size)
+    shape.elasticity = elastic
     space.add(body, shape)
     return shape
 

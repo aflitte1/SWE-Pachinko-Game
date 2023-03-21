@@ -42,19 +42,24 @@ def main():
 
             case bnd.GameStatus.LEVEL_1:
                 ball_max = 50
-                GamePhases.level_one()
                 if not level_start:
-                    Pegs.append(bnd.create_peg(Space, (500, 500)))
+                    GamePhases.level_one()
+                    for i in range(20):
+                        x_pos = np.random.uniform(20, 780)
+                        y_pos = np.random.uniform(40, 700)
+                        Pegs.append(bnd.create_peg(Space, (x_pos, y_pos), 25, 0.5))
+                        i += 1
                     level_start = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 50)
+                    spawn_ball = np.random.randint(0, 500)
                     if spawn_ball == 0:
-                        Balls.append(bnd.create_ball(Space, (400, 0)))
+                        x_pos = np.random.uniform(20, 780)
+                        Balls.append(bnd.create_ball(Space, (x_pos, 0), 40, 2))
                         ball_count += 1
 
                 P1.update()
-                P1.draw()
+                P1.draw(Screen)
 
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()

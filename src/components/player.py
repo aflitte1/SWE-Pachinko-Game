@@ -7,6 +7,7 @@ FRIC = -0.10
 HIGHT = 800
 WIDTH = 800
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -27,7 +28,7 @@ class Player(pygame.sprite.Sprite):
             self.acc.x = -ACC
         if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
             self.acc.x = ACC
-        
+
         self.acc.x += self.vel.x * FRIC
         self.acc.y += self.vel.y * FRIC
         self.vel += self.acc

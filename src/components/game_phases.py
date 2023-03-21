@@ -15,8 +15,10 @@ def main_menu_phase():
 def level_one():
     # Background Image Setup
     # The background image will eventually become a global variable dependent on cosmetics
-    BackGround.IMAGE = Background('assets/1.jpg', [0, 0], 1.0)
-    Space.gravity = (0, 800)
+    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
+    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+    BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
+    Space.gravity = (0, 100)
 
 
 def level_two():
