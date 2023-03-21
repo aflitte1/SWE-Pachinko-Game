@@ -9,14 +9,14 @@ from components.player import *
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
 Clock = pygame.time.Clock()
-space = pymunk.Space()
-space.gravity = (0, 500)  # X gravity, Y gravity
+Space = pymunk.Space()
+Space.gravity = (0, 500)  # X gravity, Y gravity
 
 
 def update_game_display():
     pygame.display.update()
     Clock.tick(120)
-    space.step(1/50)  # Updating time for physics sim
+    Space.step(1/50)  # Updating time for physics sim
 
 
 def main():
@@ -25,8 +25,8 @@ def main():
     ball_count = 0
     level_start = False
     while True:
-        for even in pygame.event.get():
-            if even.type == pygame.QUIT:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
