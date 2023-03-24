@@ -18,7 +18,7 @@ pegs = []
 pegs.append(bnd.create_peg(space, (500, 500)))
 pegs.append(bnd.create_peg(space, (250, 600)))
 
-
+bnd.create_borders(space)
 def draw_static_peg(pegs):
     for peg in pegs:
         pos_x = int(peg.body.position.x)
