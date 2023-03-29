@@ -10,7 +10,6 @@ pygame.init()
 Screen = pygame.display.set_mode((800, 800))
 Clock = pygame.time.Clock()
 Space = pymunk.Space()
-Space.gravity = (0, 500)  # X gravity, Y gravity
 
 # Sprite Setup
 P1 = Player()
@@ -60,9 +59,7 @@ def main():
                         x_pos = np.random.uniform(20, 780)
                         Balls.append(bnd.create_ball(Space, (x_pos, 0), 40, 2))
                         ball_count += 1
-
-                P1.update()
-                P1.draw(Screen)
+                P1.move()
 
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
@@ -77,6 +74,8 @@ def main():
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
         bnd.draw_ball(Screen, Balls)
         bnd.draw_peg(Screen, Pegs)
+        if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
+            P1.draw(Screen)
         update_game_display()
 
 
