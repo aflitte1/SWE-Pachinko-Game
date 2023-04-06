@@ -30,7 +30,6 @@ class Player(pygame.sprite.Sprite):
             self.acc.x = ACC
 
         self.acc.x += self.vel.x * FRIC
-        self.acc.y += self.vel.y * FRIC
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
@@ -40,10 +39,6 @@ class Player(pygame.sprite.Sprite):
             self.pos.x = WIDTH
         if self.pos.x < 0:
             self.pos.x = 0
-        if self.pos.y > HIGHT:
-            self.pos.y = HIGHT
-        if self.pos.y < 0:
-            self.pos.y = 0
 
         self.rect.center = self.pos
 

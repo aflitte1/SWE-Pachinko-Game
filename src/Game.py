@@ -61,7 +61,7 @@ def main():
                         Balls.append(bnd.create_ball(Space, (x_pos, 0), 40, 2))
                         ball_count += 1
 
-                P1.update()
+                P1.move()
                 P1.draw(Screen)
 
             case bnd.GameStatus.LEVEL_2:
