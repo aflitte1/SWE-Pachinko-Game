@@ -51,6 +51,7 @@ def main():
                         Pegs.append(bnd.create_peg(
                             Space, (x_pos, y_pos), 25, 0.5))
                         i += 1
+
                     level_start = True
 
                 if ball_count <= ball_max:
