@@ -10,7 +10,6 @@ pygame.init()
 Screen = pygame.display.set_mode((800, 800))
 Clock = pygame.time.Clock()
 Space = pymunk.Space()
-Space.gravity = (0, 500)  # X gravity, Y gravity
 
 # Sprite Setup
 P1 = Player()
@@ -52,6 +51,7 @@ def main():
                         Pegs.append(bnd.create_peg(
                             Space, (x_pos, y_pos), 25, 0.5))
                         i += 1
+
                     level_start = True
 
                 if ball_count <= ball_max:
@@ -77,6 +77,8 @@ def main():
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
         bnd.draw_ball(Screen, Balls)
         bnd.draw_peg(Screen, Pegs)
+        if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
+            P1.draw(Screen)
         update_game_display()
 
 
