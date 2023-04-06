@@ -4,12 +4,11 @@ import pymunk
 from enum import Enum
 
 
-def create_ball(space, pos):
+def create_ball(space, pos, size, elastic):
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
-    # body.position = (400, 0)
     body.position = pos
-    shape = pymunk.Circle(body, 80)  # Pass in body and radius
-    shape.elasticity = 1
+    shape = pymunk.Circle(body, size)  # Pass in body and radius
+    shape.elasticity = elastic
     space.add(body, shape)
     return shape
 
@@ -28,11 +27,11 @@ def ball_look(file_name, scale) -> pygame.SurfaceType:
     return surface
 
 
-def create_peg(space, pos):
+def create_peg(space, pos, size, elastic):
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
     body.position = pos
-    shape = pymunk.Circle(body, 50)
-    shape.elasticity = 0.5
+    shape = pymunk.Circle(body, size)
+    shape.elasticity = elastic
     space.add(body, shape)
     return shape
 
@@ -43,6 +42,22 @@ def draw_peg(screen, pegs):
         pos_y = int(peg.body.position.y)
         peg_rect = PegSurface.SURFACE.get_rect(center=(pos_x, pos_y))
         screen.blit(PegSurface.SURFACE, peg_rect)
+
+
+def create_rectangle_static(space, pos_x, pos_y, width, height):
+
+    body = pymunk.Body(body_type=pymunk.Body.STATIC)
+
+    body.position = (pos_x, pos_y)
+    shape = pymunk.Poly.create_box(body, (width, height))
+    shape.elasticity = 0.1
+    space.add(body, shape)
+
+
+def create_borders(space):
+    # create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
+    create_rectangle_static(space, -100, 400, 200, 800)  # left wall
+    create_rectangle_static(space, 899, 400, 200, 800)  # right wall
 
 
 class Background(pygame.sprite.Sprite):

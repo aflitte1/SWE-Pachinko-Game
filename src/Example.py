@@ -10,13 +10,13 @@ pygame.init()
 screen = pygame.display.set_mode((800, 800))  # Creates a window
 clock = pygame.time.Clock()  # Creates a game clock
 space = pymunk.Space()  # Creates bgndical space
-space.gravity = (0, 500)  # gravity(horizontal gravity, vertical gravity)
+space.gravity = (0, 100)  # gravity(horizontal gravity, vertical gravity)
 
 balls = []
 
 pegs = []
-pegs.append(bnd.create_peg(space, (500, 500)))
-pegs.append(bnd.create_peg(space, (250, 600)))
+pegs.append(bnd.create_peg(space, (500, 500), 50, 0.5))
+pegs.append(bnd.create_peg(space, (250, 600), 50, 0.5))
 
 
 def draw_static_peg(pegs):
@@ -33,7 +33,7 @@ def main():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                balls.append(bnd.create_ball(space, event.pos))
+                balls.append(bnd.create_ball(space, event.pos, 80, 2))
 
         # This sets the background color. Im curious if we can just imput and image
         screen.fill((217, 217, 217))
