@@ -19,6 +19,13 @@ def ball_look(file_name, scale) -> pygame.SurfaceType:
     return surface
 
 
+def delete_ball(pos_y):
+    if (pos_y > 850):
+        return True
+    else:
+        return False
+
+
 class Ball(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()

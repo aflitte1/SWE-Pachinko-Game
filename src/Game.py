@@ -69,7 +69,6 @@ def main():
 
                 if pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask):
                     print("COLLISION")
-                    
 
                 P1.move()
                 P1.draw(Screen)
@@ -90,6 +89,9 @@ def main():
         bnd.draw_peg(Screen, Pegs)
         if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
             P1.draw(Screen)
+        for ball in Balls:
+            if (bnd.delete_ball(ball.body.position.y)):
+                Balls.remove(ball)
         update_game_display()
 
 
