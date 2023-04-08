@@ -14,6 +14,8 @@ Space = pymunk.Space()
 # Sprite Setup
 P1 = Player()
 
+all_balls = pygame.sprite.Group()
+
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
 
@@ -27,6 +29,7 @@ def update_game_display():
 def main():
     Balls = []
     Pegs = []
+    ball_sprites = []
     ball_count = 0
     level_start = False
     bnd.create_borders(Space)
@@ -51,16 +54,24 @@ def main():
                         Pegs.append(bnd.create_peg(
                             Space, (x_pos, y_pos), 25, 0.5))
                         i += 1
-
                     level_start = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        Balls.append(bnd.create_ball(Space, (x_pos, 0), 40, 2))
+                        new_ball = bnd.create_ball(Space, (x_pos, 0), 40, 2)
+                        Balls.append(new_ball)
+                        ball_sprite = bnd.Ball()
+                        ball_sprites.append(ball_sprite)
+                        all_balls.add(ball_sprite)
                         ball_count += 1
+
+                if pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask):
+                    print("COLLISION")
+
                 P1.move()
+                P1.draw(Screen)
 
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
@@ -73,10 +84,14 @@ def main():
 
         Screen.fill((217, 217, 217))
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
-        bnd.draw_ball(Screen, Balls)
+        for i in range(len(Balls)):
+            ball_sprites[i].draw(Screen, Balls[i])
         bnd.draw_peg(Screen, Pegs)
         if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
             P1.draw(Screen)
+        for ball in Balls:
+            if (bnd.delete_ball(ball.body.position.y)):
+                Balls.remove(ball)
         update_game_display()
 
 
