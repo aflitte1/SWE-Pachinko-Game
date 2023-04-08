@@ -76,8 +76,7 @@ class GameStatus(Enum):
 
 
 class GlobalState:
-    #GAME_STATE = GameStatus.MAIN_MENU
-    GAME_STATE = GameStatus.LEVEL_3
+    GAME_STATE = GameStatus.MAIN_MENU
 
 
 class BackGround:
