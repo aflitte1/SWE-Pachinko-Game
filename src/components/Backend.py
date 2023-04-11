@@ -13,18 +13,31 @@ def create_ball(space, pos, size, elastic):
     return shape
 
 
-def draw_ball(screen, balls):
-    for ball in balls:
-        pos_x = int(ball.body.position.x)
-        pos_y = int(ball.body.position.y)
-        ball_rect = BallSurface.SURFACE.get_rect(center=(pos_x, pos_y))
-        screen.blit(BallSurface.SURFACE, ball_rect)
-
-
 def ball_look(file_name, scale) -> pygame.SurfaceType:
     surface = pygame.image.load(file_name)
     surface = pygame.transform.rotozoom(surface, 0, scale)
     return surface
+
+
+def delete_ball(pos_y):
+    if (pos_y > 850):
+        return True
+    else:
+        return False
+
+
+class Ball(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = BallSurface.SURFACE
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+
+    def draw(self, screen, ball):
+        pos_x = int(ball.body.position.x)
+        pos_y = int(ball.body.position.y)
+        self.rect = self.image.get_rect(center=(pos_x, pos_y))
+        screen.blit(self.image, self.rect)
 
 
 def create_peg(space, pos, size, elastic):
@@ -43,6 +56,7 @@ def draw_peg(screen, pegs):
         peg_rect = PegSurface.SURFACE.get_rect(center=(pos_x, pos_y))
         screen.blit(PegSurface.SURFACE, peg_rect)
 
+
 def create_rectangle_static(space, pos_x, pos_y, width, height):
 
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
@@ -54,8 +68,10 @@ def create_rectangle_static(space, pos_x, pos_y, width, height):
 
 
 def create_borders(space):
+    # create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
     create_rectangle_static(space, -100, 400, 200, 800)  # left wall
     create_rectangle_static(space, 899, 400, 200, 800)  # right wall
+
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location, scale):
