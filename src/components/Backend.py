@@ -1,7 +1,10 @@
 import pygame
+from pygame.locals import *
 import sys
 import pymunk
 from enum import Enum
+
+vec = pygame.math.Vector2
 
 
 def create_ball(space, pos, size, elastic):
@@ -20,7 +23,7 @@ def ball_look(file_name, scale) -> pygame.SurfaceType:
 
 
 def delete_ball(pos_y):
-    if (pos_y > 850):
+    if (pos_y > 450):
         return True
     else:
         return False
@@ -33,11 +36,13 @@ class Ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         new_ball = create_ball(Space, (x, 0), 40, 2)
+        self.pos = vec((int(new_ball.body.position.x), int(new_ball.body.position.y)))
         Balls.append(new_ball)
 
     def draw(self, screen, ball):
         pos_x = int(ball.body.position.x)
         pos_y = int(ball.body.position.y)
+        self.pos = vec((pos_x, pos_y))
         self.rect = self.image.get_rect(center=(pos_x, pos_y))
         screen.blit(self.image, self.rect)
 
@@ -73,6 +78,35 @@ def create_borders(space):
     # create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
     create_rectangle_static(space, -100, 400, 200, 800)  # left wall
     create_rectangle_static(space, 899, 400, 200, 800)  # right wall
+
+
+def collide(Player, Balls):
+    for ball in Balls:
+        b_pixle_w = ball.image.get_width()
+        b_pixle_h = ball.image.get_height()
+        b_pos_x = ball.pos.x
+        b_pos_y = ball.pos.y
+
+        b_right = b_pos_x + (b_pixle_w / 2)
+        b_left = b_pos_x - (b_pixle_w / 2)
+        b_top = b_pos_y + (b_pixle_h / 2)
+        b_bottom = b_pos_y - (b_pixle_h / 2)
+
+        p_pixle_w = Player.image.get_width()
+        p_pixle_h = Player.image.get_height()
+        p_pos_x = Player.pos.x
+        p_pos_y = Player.pos.y
+
+        p_right = p_pos_x + (p_pixle_w / 2)
+        p_left = p_pos_x - (p_pixle_w / 2)
+        p_top = p_pos_y + (p_pixle_h / 2)
+        p_bottom = p_pos_y - (p_pixle_h / 2)
+
+        if ((((p_right >= b_left) and (p_left < b_left)) or ((p_left <= b_right) and (p_right > b_right)))
+             and (((p_top >= b_bottom) and (p_bottom < b_bottom)))):
+            # Balls.remove(ball)
+            return True
+    return False
 
 
 class Background(pygame.sprite.Sprite):

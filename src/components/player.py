@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.rotozoom(self.image, 0, 0.40)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
-        self.pos = vec((400, 750))
+        self.pos = vec((400, 700))
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.player_position = vec(0, 0)
