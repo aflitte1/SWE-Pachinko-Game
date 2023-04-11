@@ -92,9 +92,8 @@ def main():
                     if spawn_ball == 0:     
                         if ball_count % 10 == 0:
                             ball_pos += 180 
-                        Balls.append(bnd.create_ball(Space, (ball_pos, 0), 43, 1))
-                        ball_sprite = bnd.Ball()
-                        ball_sprites.append(ball_sprite)
+                        ball_sprite = bnd.Ball(x_pos, Space)
+                        Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
                 
