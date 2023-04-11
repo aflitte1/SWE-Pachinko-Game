@@ -30,12 +30,12 @@ def delete_ball(pos_y):
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, x, Space):
+    def __init__(self, x, Space, size, elastic):
         super().__init__()
         self.image = BallSurface.SURFACE
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
-        self.phys = create_ball(Space, (x, 0), 40, 2)
+        self.phys = create_ball(Space, (x, 0), size, elastic)
         self.pos = vec((int(self.phys.body.position.x), int(self.phys.body.position.y)))
 
     def draw(self, screen):

@@ -62,7 +62,7 @@ def main():
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        ball_sprite = bnd.Ball(x_pos, Space)
+                        ball_sprite = bnd.Ball(x_pos, Space, 40, 2)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
@@ -92,15 +92,14 @@ def main():
                     if spawn_ball == 0:     
                         if ball_count % 10 == 0:
                             ball_pos += 180 
-                        ball_sprite = bnd.Ball(x_pos, Space)
+                        ball_sprite = bnd.Ball(ball_pos, Space, 43, 1)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
-                
-                current_count = collision_count
-                collision_count += len(pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask))
-                if collision_count > current_count:
-                    print(collision_count)
+
+                if bnd.collide(P1, Balls):
+                    collision_count += 1
+                    print("Collision ", collision_count)
 
             case bnd.GameStatus.LEVEL_4:
                 GamePhases.level_four()
