@@ -27,11 +27,13 @@ def delete_ball(pos_y):
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, Balls, Space):
         super().__init__()
         self.image = BallSurface.SURFACE
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
+        new_ball = create_ball(Space, (x, 0), 40, 2)
+        Balls.append(new_ball)
 
     def draw(self, screen, ball):
         pos_x = int(ball.body.position.x)

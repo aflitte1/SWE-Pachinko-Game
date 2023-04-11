@@ -48,26 +48,24 @@ def main():
                 ball_max = 50
                 if not level_start:
                     GamePhases.level_one()
-                    for i in range(20):
+                    for i in range(10):
                         x_pos = np.random.uniform(20, 780)
                         y_pos = np.random.uniform(40, 700)
                         Pegs.append(bnd.create_peg(
                             Space, (x_pos, y_pos), 25, 0.5))
-                        i += 1
                     level_start = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        new_ball = bnd.create_ball(Space, (x_pos, 0), 40, 2)
-                        Balls.append(new_ball)
-                        ball_sprite = bnd.Ball()
+                        ball_sprite = bnd.Ball(x_pos, Balls, Space)
                         ball_sprites.append(ball_sprite)
-                        all_balls.add(ball_sprite)
+                        all_balls.add(ball_sprite)          #<---- adding the ball sprite to the sprite group
                         ball_count += 1
+                        print(all_balls)
 
-                if pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask):
+                if pygame.sprite.spritecollide(P1, all_balls, True):  # <---- sprite collision between the player and a ball should be detected here
                     print("COLLISION")
 
                 P1.move()
