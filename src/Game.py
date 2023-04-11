@@ -31,7 +31,9 @@ def main():
     Pegs = []
     ball_sprites = []
     ball_count = 0
+    ball_pos = 0
     level_start = False
+    collision_count = 0
     bnd.create_borders(Space)
     while True:
         for event in pygame.event.get():
@@ -70,16 +72,42 @@ def main():
                 if pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask):
                     print("COLLISION")
 
-                P1.move()
-                P1.draw(Screen)
-
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
 
             case bnd.GameStatus.LEVEL_3:
-                GamePhases.level_three()
+                ball_max = 29
+                Space.gravity = (0, 300)
+                if not level_start:
+                    GamePhases.level_three()
+                    Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (665, 550), 43, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (325, 225), 43, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (625, 250), 43, 0.5))
+                    level_start = True
+
+                if ball_count <= ball_max:
+                    spawn_ball = np.random.randint(0, 50)
+                    if spawn_ball == 0:     
+                        if ball_count % 10 == 0:
+                            ball_pos += 180 
+                        Balls.append(bnd.create_ball(Space, (ball_pos, 0), 43, 1))
+                        ball_sprite = bnd.Ball()
+                        ball_sprites.append(ball_sprite)
+                        all_balls.add(ball_sprite)
+                        ball_count += 1
+                
+                current_count = collision_count
+                collision_count += len(pygame.sprite.spritecollide(P1, all_balls, True, pygame.sprite.collide_mask))
+                if collision_count > current_count:
+                    print(collision_count)
 
             case bnd.GameStatus.LEVEL_4:
+                GamePhases.level_four()
+
+            case bnd.GameStatus.COS_MENU:
                 GamePhases.cos_menu()
 
         Screen.fill((217, 217, 217))
@@ -88,6 +116,7 @@ def main():
             ball_sprites[i].draw(Screen, Balls[i])
         bnd.draw_peg(Screen, Pegs)
         if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
+            P1.move()
             P1.draw(Screen)
         for ball in Balls:
             if (bnd.delete_ball(ball.body.position.y)):
