@@ -23,25 +23,24 @@ def ball_look(file_name, scale) -> pygame.SurfaceType:
 
 
 def delete_ball(pos_y):
-    if (pos_y > 450):
+    if (pos_y > 850):
         return True
     else:
         return False
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, x, Balls, Space):
+    def __init__(self, x, Space):
         super().__init__()
         self.image = BallSurface.SURFACE
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
-        new_ball = create_ball(Space, (x, 0), 40, 2)
-        self.pos = vec((int(new_ball.body.position.x), int(new_ball.body.position.y)))
-        Balls.append(new_ball)
+        self.phys = create_ball(Space, (x, 0), 40, 2)
+        self.pos = vec((int(self.phys.body.position.x), int(self.phys.body.position.y)))
 
-    def draw(self, screen, ball):
-        pos_x = int(ball.body.position.x)
-        pos_y = int(ball.body.position.y)
+    def draw(self, screen):
+        pos_x = int(self.phys.body.position.x)
+        pos_y = int(self.phys.body.position.y)
         self.pos = vec((pos_x, pos_y))
         self.rect = self.image.get_rect(center=(pos_x, pos_y))
         screen.blit(self.image, self.rect)
@@ -104,7 +103,7 @@ def collide(Player, Balls):
 
         if ((((p_right >= b_left) and (p_left < b_left)) or ((p_left <= b_right) and (p_right > b_right)))
              and (((p_top >= b_bottom) and (p_bottom < b_bottom)))):
-            # Balls.remove(ball)
+            Balls.remove(ball)
             return True
     return False
 

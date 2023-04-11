@@ -29,7 +29,7 @@ def update_game_display():
 def main():
     Balls = []
     Pegs = []
-    ball_sprites = []
+    Balls = []
     dead_balls = []
     ball_count = 0
     level_start = False
@@ -50,33 +50,25 @@ def main():
                 ball_max = 50
                 if not level_start:
                     GamePhases.level_one()
-                    # for i in range(10):
-                    #     x_pos = np.random.uniform(20, 780)
-                    #     y_pos = np.random.uniform(40, 700)
-                    #     Pegs.append(bnd.create_peg(
-                    #         Space, (x_pos, y_pos), 25, 0.5))
+                    for i in range(10):
+                        x_pos = np.random.uniform(20, 780)
+                        y_pos = np.random.uniform(40, 700)
+                        Pegs.append(bnd.create_peg(
+                            Space, (x_pos, y_pos), 25, 0.5))
                     level_start = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        ball_sprite = bnd.Ball(x_pos, Balls, Space)
-                        ball_sprites.append(ball_sprite)
-                        # <---- adding the ball sprite to the sprite group
-                        all_sprites.add(ball_sprite)
+                        ball_sprite = bnd.Ball(x_pos, Space)
+                        Balls.append(ball_sprite)
+                        all_balls.add(ball_sprite)
                         ball_count += 1
 
-                # if bnd.collide(P1, all_balls):
-                #     score += 1
-                #     print("Collision ", score)
-
-                # <---- sprite collision between the player and a ball should be detected here
-                collided_balls = pygame.sprite.spritecollide(P1, all_balls, False)
-
-                for ball in collided_balls:
+                if bnd.collide(P1, Balls):
                     score += 1
-                    print("Score: ", score)
+                    print("Collision ", score)
 
                 P1.move()
                 P1.draw(Screen)
@@ -93,12 +85,12 @@ def main():
         Screen.fill((217, 217, 217))
         Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
         for i in range(len(Balls)):
-            ball_sprites[i].draw(Screen, Balls[i])
+            Balls[i].draw(Screen)
         bnd.draw_peg(Screen, Pegs)
         if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
             P1.draw(Screen)
         for ball in Balls:
-            if (bnd.delete_ball(ball.body.position.y)):
+            if (bnd.delete_ball(ball.phys.body.position.y)):
                 Balls.remove(ball)
                 # del ball
         update_game_display()
