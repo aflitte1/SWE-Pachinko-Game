@@ -5,9 +5,10 @@ import pymunk
 from enum import Enum
 
 vec = pygame.math.Vector2
+DEFAULT = bool
 
 
-def create_ball(space, pos, size, elastic):
+def create_ball(space, pos, size, elastic) -> pymunk.Circle:
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
     body.position = pos
     shape = pymunk.Circle(body, size)  # Pass in body and radius
