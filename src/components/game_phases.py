@@ -1,14 +1,12 @@
 import sys
-import pymunk
 import pygame
 from components.Backend import *
+import pygame_menu
+from typing import Tuple, Any
 
 
 def main_menu_phase(Screen):
     BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
-    #for event in pygame.event.get():
-    #    if event.type == pygame.KEYUP:
-    #        GlobalState.GAME_STATE = GameStatus.LEVEL_1
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
     MENU_TEXT = get_font(50).render("MAIN MENU", True, "#b68f40")
@@ -62,5 +60,39 @@ def level_four():
     BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
 
 
-def cos_menu():
-    BackGround.IMAGE = Background('assets/cosmetic.jpg', [0, 0], 1.5)
+def cos_menu(Screen):
+    def set_background(selected: Tuple, file: Any, location: Any, scale: Any) -> None:
+        BackGround.IMAGE = Background(file, location, scale)
+
+    def set_peg(selected: Tuple, file: Any, scale: Any) -> None:
+        PegSurface.SURFACE = ball_look(file, scale)
+
+    def set_ball(selected: Tuple, file: Any, scale: Any) -> None:
+        BallSurface.SURFACE = ball_look(file, scale)
+    
+    def menu_play():
+        menu.disable()
+        GlobalState.GAME_STATE = GameStatus.LEVEL_4
+    
+    def menu_quit():
+        menu.disable()
+        GlobalState.GAME_STATE = GameStatus.MAIN_MENU
+    
+    #intializing selections
+    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
+    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+    BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
+
+    menu = pygame_menu.Menu(
+        height=800,
+        theme=pygame_menu.themes.THEME_BLUE,
+        title='Cosemtics',
+        width=800
+    )
+
+    menu.add.selector('Background: ', [('Space', 'assets/space_background.jpg', [0, 0], 1.0), ('Haunted', 'assets/haunted_background.jpeg', [-8, 0], 0.56)], onchange=set_background)
+    menu.add.selector('Peg: ', [('Space', 'assets/space_peg.png', 0.1), ('Haunted', 'assets/haunted_peg.png', 0.40)], onchange=set_peg)
+    menu.add.selector('Ball: ', [('Space', 'assets/space_ball.png', 0.075), ('Haunted', 'assets/haunted_ball.png', 0.15)], onchange=set_ball)
+    menu.add.button('Play', menu_play)
+    menu.add.button('Back', menu_quit)
+    menu.mainloop(Screen)
