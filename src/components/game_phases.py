@@ -48,7 +48,8 @@ def level_one() -> None:
 
 
 def level_two() -> None:
-    BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
+    if DEFAULT:
+        BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
 
 
 def level_three():
@@ -59,7 +60,8 @@ def level_three():
 
 
 def level_four() -> None:
-    BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
+    if DEFAULT:
+        BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
 
 
 def cos_menu(Screen):
