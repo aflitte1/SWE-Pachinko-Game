@@ -5,8 +5,6 @@ import pymunk
 from enum import Enum
 
 vec = pygame.math.Vector2
-DEFAULT = bool
-
 
 def create_ball(space, pos, size, elastic) -> pymunk.Circle:
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
@@ -129,6 +127,9 @@ class GameStatus(Enum):
 
 class GlobalState:
     GAME_STATE = GameStatus.MAIN_MENU
+
+class Default_Cosmetics:
+    state = bool
 
 
 class BackGround:

@@ -60,6 +60,7 @@ def main():
     ball_pos = 0
     level_start = False
     collision_count = 0
+    bnd.Default_Cosmetics.state = True
     bnd.create_borders(Space)
     while True:
         for event in pygame.event.get():
@@ -125,9 +126,9 @@ def main():
                     print("Collision ", collision_count)
 
             case bnd.GameStatus.LEVEL_4:
-                #using cosmetics selections
                 Space.gravity = (0, 300)
                 if not level_start:
+                    GamePhases.level_four()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
