@@ -26,18 +26,18 @@ def update_game_display():
     Space.step(1/50)  # Updating time for physics sim
 
 def game_over():
-    MENU_MOUSE_POS = pygame.mouse.get_pos()
-    MENU_TEXT = bnd.get_font(50).render("GAME OVER", True, "#b68f40")
-    MENU_RECT = MENU_TEXT.get_rect(center=(400, 100))
+    GAME_MOUSE_POS = pygame.mouse.get_pos()
+    GAME_TEXT = bnd.get_font(50).render("GAME OVER", True, "#b68f40")
+    GAME_RECT = GAME_TEXT.get_rect(center=(400, 100))
 
     PLAY_BUTTON = bnd.Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400), 
                         text_input="PLAY AGAIN", font=bnd.get_font(35), base_color="#d7fcd4", hovering_color="White")
-    QUIT_BUTTON = bnd.Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550), 
+    MENU_BUTTON = bnd.Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550), 
                         text_input="MAIN MENU", font=bnd.get_font(35), base_color="#d7fcd4", hovering_color="White")
-    Screen.blit(MENU_TEXT, MENU_RECT)
+    Screen.blit(GAME_TEXT, GAME_RECT)
 
-    for button in [PLAY_BUTTON, QUIT_BUTTON]:
-        button.changeColor(MENU_MOUSE_POS)
+    for button in [PLAY_BUTTON, MENU_BUTTON]:
+        button.changeColor(GAME_MOUSE_POS)
         button.update(Screen)
 
     for event in pygame.event.get():
@@ -45,9 +45,9 @@ def game_over():
             pygame.quit()
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
+            if PLAY_BUTTON.checkForInput(GAME_MOUSE_POS):
                 return True
-            if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
+            if MENU_BUTTON.checkForInput(GAME_MOUSE_POS):
                 GamePhases.GlobalState.GAME_STATE = GamePhases.GameStatus.MAIN_MENU
                 return True
     return False
