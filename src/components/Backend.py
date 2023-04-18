@@ -6,8 +6,7 @@ from enum import Enum
 
 vec = pygame.math.Vector2
 
-
-def create_ball(space, pos, size, elastic):
+def create_ball(space, pos, size, elastic) -> pymunk.Circle:
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
     body.position = pos
     shape = pymunk.Circle(body, size)  # Pass in body and radius
@@ -128,6 +127,9 @@ class GameStatus(Enum):
 
 class GlobalState:
     GAME_STATE = GameStatus.MAIN_MENU
+
+class Default_Cosmetics:
+    state = bool
 
 
 class BackGround:
