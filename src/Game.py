@@ -70,7 +70,8 @@ def main():
         match bnd.GlobalState.GAME_STATE:
             case bnd.GameStatus.MAIN_MENU:
                 GamePhases.main_menu_phase(Screen)
-
+            case bnd.GameStatus.LEVEL_SELECT:
+                GamePhases.level_select_phase(Screen)
             case bnd.GameStatus.LEVEL_1:
                 Space.gravity = (0, 100)
                 if not level_start:
@@ -153,27 +154,26 @@ def main():
             case bnd.GameStatus.COS_MENU:
                 GamePhases.cos_menu(Screen)
 
-        if bnd.GlobalState.GAME_STATE != bnd.GameStatus.MAIN_MENU:
-            if bnd.GlobalState.GAME_STATE != bnd.GameStatus.COS_MENU:
-                Screen.fill((217, 217, 217))
-                Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
-                for i in range(len(Balls)):
-                    Balls[i].draw(Screen)
-                bnd.draw_peg(Screen, Pegs)
-                P1.move()
-                P1.draw(Screen)
-                if(ball_count == ball_max+1) & (len(Balls) == 0):
-                    if(game_over()):
-                        Pegs.clear()
-                        ball_count = 0
-                        ball_pos = 0
-                        level_start = False
-                        collision_count = 0 
+        if bnd.GlobalState.GAME_STATE not in {bnd.GameStatus.MAIN_MENU, bnd.GameStatus.COS_MENU, bnd.GameStatus.LEVEL_SELECT}:
+            Screen.fill((217, 217, 217))
+            Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
+            for i in range(len(Balls)):
+                Balls[i].draw(Screen)
+            bnd.draw_peg(Screen, Pegs)
+            P1.move()
+            P1.draw(Screen)
+            if(ball_count == ball_max+1) & (len(Balls) == 0):
+                if(game_over()):
+                    Pegs.clear()
+                    ball_count = 0
+                    ball_pos = 0
+                    level_start = False
+                    collision_count = 0 
 
-                for ball in Balls:
-                    if (bnd.delete_ball(ball.phys.body.position.y)):
-                        Balls.remove(ball)
-                        # del ball
+            for ball in Balls:
+                if (bnd.delete_ball(ball.phys.body.position.y)):
+                    Balls.remove(ball)
+                    # del ball
         update_game_display()
 
 

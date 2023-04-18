@@ -12,15 +12,54 @@ def main_menu_phase(Screen):
     MENU_TEXT = get_font(50).render("MAIN MENU", True, "#b68f40")
     MENU_RECT = MENU_TEXT.get_rect(center=(400, 100))
 
-    PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 250), 
-                        text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+    LEVEL_SELECT_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 250), 
+                        text_input="Level Select", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 400), 
-                         text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                         text_input="OPTIONS", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550), 
-                        text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                        text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     Screen.blit(MENU_TEXT, MENU_RECT)
 
-    for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
+    for button in [LEVEL_SELECT_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
+        button.changeColor(MENU_MOUSE_POS)
+        button.update(Screen)
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if LEVEL_SELECT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                GlobalState.GAME_STATE = GameStatus.LEVEL_SELECT
+            if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
+                GlobalState.GAME_STATE = GameStatus.COS_MENU
+            if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                pygame.quit()
+                sys.exit()
+
+
+def level_select_phase(Screen):
+    print("hello")
+    BackGround.IMAGE = Background('assets/level_select_background.jpg', [0, 0], 1.5)
+    Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
+    MENU_MOUSE_POS = pygame.mouse.get_pos()
+    LEVEL_SELECT_TEXT = get_font(50).render("Level Select", True, "#b68f40")
+    LEVEL_SELECT_RECT = LEVEL_SELECT_TEXT.get_rect(center=(400, 100))
+
+    PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 700), 
+                        text_input="PLAY", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
+    LEADERBOARD_BUTTON = Button(image=pygame.image.load("assets/leaderboard_button.webp"), pos=(700, 100), 
+                        text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
+                                
+    BACK_BUTTON = Button(image=pygame.image.load("assets/back_arrow.png"), pos=(100, 100), 
+                        text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
+    RIGHT_BUTTON = Button(image=pygame.image.load("assets/right_button.png"), pos=(600, 400),
+                          text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
+    LEFT_BUTTON = Button(image=pygame.image.load("assets/left_button.png"), pos=(200, 400),
+                         text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
+    Screen.blit(LEVEL_SELECT_TEXT, LEVEL_SELECT_RECT)
+
+    for button in [PLAY_BUTTON, LEADERBOARD_BUTTON, RIGHT_BUTTON, LEFT_BUTTON, BACK_BUTTON]: 
         button.changeColor(MENU_MOUSE_POS)
         button.update(Screen)
     
@@ -30,12 +69,27 @@ def main_menu_phase(Screen):
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                GlobalState.GAME_STATE = GameStatus.LEVEL_3
-            if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
-                GlobalState.GAME_STATE = GameStatus.COS_MENU
-            if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
-                pygame.quit()
-                sys.exit()
+                match CurrentLevel.num:
+                    case 1:
+                        GlobalState.GAME_STATE = GameStatus.LEVEL_1
+                    case 2:
+                        GlobalState.GAME_STATE = GameStatus.LEVEL_2
+                    case 3:
+                        GlobalState.GAME_STATE = GameStatus.LEVEL_3
+                    case 4:
+                        GlobalState.GAME_STATE = GameStatus.LEVEL_4
+            elif BACK_BUTTON.checkForInput(MENU_MOUSE_POS):
+                GlobalState.GAME_STATE = GameStatus.MAIN_MENU
+            elif LEADERBOARD_BUTTON.checkForInput(MENU_MOUSE_POS):
+                pass
+            elif RIGHT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                if CurrentLevel.num != 4:
+                    CurrentLevel.num = CurrentLevel.num + 1
+                    print("Current Level is now", CurrentLevel.num)
+            elif LEFT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                if CurrentLevel.num != 1:
+                    CurrentLevel.num = CurrentLevel.num - 1
+                    print("Current Level is now", CurrentLevel.num)
 
 
 def level_one():

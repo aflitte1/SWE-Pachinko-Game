@@ -124,7 +124,10 @@ class GameStatus(Enum):
     LEVEL_3 = 3
     LEVEL_4 = 4
     COS_MENU = 5
+    LEVEL_SELECT = 6
 
+class CurrentLevel():
+    num = 1
 
 class GlobalState:
     GAME_STATE = GameStatus.MAIN_MENU
