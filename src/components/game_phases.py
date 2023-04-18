@@ -1,11 +1,13 @@
 import sys
 import pygame
-from components.Backend import *
+from src.components.Backend import *
+from src.components.music import MusicService
 import pygame_menu
 from typing import Tuple, Any
 
 
 def main_menu_phase(Screen):
+    MusicService.start_menu_music()
     BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
