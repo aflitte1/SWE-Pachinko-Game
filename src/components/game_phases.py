@@ -43,6 +43,8 @@ def main_menu_phase(Screen) -> None:
 def level_one() -> None:
     # Background Image Setup
     # The background image will eventually become a global variable dependent on cosmetics
+    MusicService.stop_music()
+    MusicService.start_level_1_music()
     if Default_Cosmetics.state:
         BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
         PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
@@ -50,11 +52,15 @@ def level_one() -> None:
 
 
 def level_two() -> None:
+    MusicService.stop_music()
+    MusicService.start_level_2_music()
     if Default_Cosmetics.state:
         BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
 
 
 def level_three() -> None:
+    MusicService.stop_music()
+    MusicService.start_level_3_music()
     if Default_Cosmetics.state:
         BackGround.IMAGE = Background('assets/haunted_background.jpeg', [-8, 0], 0.56)
         BallSurface.SURFACE = ball_look('assets/haunted_ball.png', 0.15)
@@ -62,6 +68,8 @@ def level_three() -> None:
 
 
 def level_four() -> None:
+    MusicService.stop_music()
+    MusicService.start_level_4_music()
     if Default_Cosmetics.state:
         BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
 

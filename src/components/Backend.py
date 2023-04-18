@@ -3,6 +3,7 @@ from pygame.locals import *
 import sys
 import pymunk
 from enum import Enum
+from src.components.music import MusicService
 
 vec = pygame.math.Vector2
 
@@ -104,6 +105,46 @@ def collide(Player, Balls):
              and (((p_top >= b_bottom) and (p_bottom < b_bottom)))):
             Balls.remove(ball)
             return True
+    return False
+
+def game_over(Screen, score, total):
+    # MusicService.stop_music()
+    # MusicService.play_finish_sound()
+
+    GAME_MOUSE_POS = pygame.mouse.get_pos()
+    GAME_TEXT = get_font(50).render("GAME OVER", True, "#b68f40")
+    GAME_RECT = GAME_TEXT.get_rect(center=(400, 100))
+
+    SCORE_WRD = get_font(50).render("SCORE", True, "#f5da0c")
+    SCORE_WRD_RECT = SCORE_WRD.get_rect(center=(400, 250))
+
+    SCORE_STR = str(score) + "/" + str(total)
+    SCORE_TEXT = get_font(50).render(SCORE_STR, True, "#f5da0c")
+    SCORE_RECT = SCORE_TEXT.get_rect(center=(400, 300))
+
+    Screen.blit(GAME_TEXT, GAME_RECT)
+    Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
+    Screen.blit(SCORE_TEXT, SCORE_RECT)
+
+    PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400),
+                             text_input="PLAY AGAIN", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
+    MENU_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
+                             text_input="MAIN MENU", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
+
+    for button in [PLAY_BUTTON, MENU_BUTTON]:
+        button.changeColor(GAME_MOUSE_POS)
+        button.update(Screen)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if PLAY_BUTTON.checkForInput(GAME_MOUSE_POS):
+                return True
+            if MENU_BUTTON.checkForInput(GAME_MOUSE_POS):
+                GlobalState.GAME_STATE = GameStatus.MAIN_MENU
+                return True
     return False
 
 

@@ -2,9 +2,9 @@ import pygame
 import pymunk
 import sys
 import numpy as np
-import components.Backend as bnd
-import components.game_phases as GamePhases
-from components.player import *
+import src.components.Backend as bnd
+import src.components.game_phases as GamePhases
+from src.components.player import *
 
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
@@ -24,44 +24,6 @@ def update_game_display():
     pygame.display.update()
     Clock.tick(120)
     Space.step(1/50)  # Updating time for physics sim
-
-
-def game_over(score, total):
-    GAME_MOUSE_POS = pygame.mouse.get_pos()
-    GAME_TEXT = bnd.get_font(50).render("GAME OVER", True, "#b68f40")
-    GAME_RECT = GAME_TEXT.get_rect(center=(400, 100))
-
-    SCORE_WRD = bnd.get_font(50).render("SCORE", True, "#f5da0c")
-    SCORE_WRD_RECT = SCORE_WRD.get_rect(center=(400, 250))
-
-    SCORE_STR = str(score) + "/" + str(total)
-    SCORE_TEXT = bnd.get_font(50).render(SCORE_STR, True, "#f5da0c")
-    SCORE_RECT = SCORE_TEXT.get_rect(center=(400, 300))
-
-    Screen.blit(GAME_TEXT, GAME_RECT)
-    Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
-    Screen.blit(SCORE_TEXT, SCORE_RECT)
-
-    PLAY_BUTTON = bnd.Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400),
-                             text_input="PLAY AGAIN", font=bnd.get_font(35), base_color="#d7fcd4", hovering_color="White")
-    MENU_BUTTON = bnd.Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
-                             text_input="MAIN MENU", font=bnd.get_font(35), base_color="#d7fcd4", hovering_color="White")
-
-    for button in [PLAY_BUTTON, MENU_BUTTON]:
-        button.changeColor(GAME_MOUSE_POS)
-        button.update(Screen)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if PLAY_BUTTON.checkForInput(GAME_MOUSE_POS):
-                return True
-            if MENU_BUTTON.checkForInput(GAME_MOUSE_POS):
-                GamePhases.GlobalState.GAME_STATE = GamePhases.GameStatus.MAIN_MENU
-                return True
-    return False
 
 
 def main():
@@ -174,7 +136,7 @@ def main():
                 P1.move()
                 P1.draw(Screen)
                 if (ball_count == ball_max+1) & (len(Balls) == 0):
-                    if (game_over(score, ball_count)):
+                    if (bnd.game_over(Screen, score, ball_count)):
                         Pegs.clear()
                         ball_count = 0
                         ball_pos = 0
