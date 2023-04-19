@@ -5,7 +5,7 @@ import pygame_menu
 from typing import Tuple, Any
 
 
-def main_menu_phase(Screen):
+def main_menu_phase(Screen) -> None:
     BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -38,29 +38,34 @@ def main_menu_phase(Screen):
                 sys.exit()
 
 
-def level_one():
+def level_one() -> None:
     # Background Image Setup
     # The background image will eventually become a global variable dependent on cosmetics
-    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
-    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
-    BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
+    if Default_Cosmetics.state:
+        BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
+        PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+        BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
 
-def level_two():
-    BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
+def level_two() -> None:
+    if Default_Cosmetics.state:
+        BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
 
 
-def level_three():
-    BackGround.IMAGE = Background('assets/haunted_background.jpeg', [-8, 0], 0.56)
-    BallSurface.SURFACE = ball_look('assets/haunted_ball.png', 0.15)
-    PegSurface.SURFACE = ball_look('assets/haunted_peg.png', 0.40)
+def level_three() -> None:
+    if Default_Cosmetics.state:
+        BackGround.IMAGE = Background('assets/haunted_background.jpeg', [-8, 0], 0.56)
+        BallSurface.SURFACE = ball_look('assets/haunted_ball.png', 0.15)
+        PegSurface.SURFACE = ball_look('assets/haunted_peg.png', 0.40)
 
 
-def level_four():
-    BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
+def level_four() -> None:
+    if Default_Cosmetics.state:
+        BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
 
 
 def cos_menu(Screen):
+    
     def set_background(selected: Tuple, file: Any, location: Any, scale: Any) -> None:
         BackGround.IMAGE = Background(file, location, scale)
 
@@ -72,11 +77,14 @@ def cos_menu(Screen):
     
     def menu_play():
         menu.disable()
-        GlobalState.GAME_STATE = GameStatus.LEVEL_4
+        GlobalState.GAME_STATE = GameStatus.LEVEL_3
     
     def menu_quit():
         menu.disable()
         GlobalState.GAME_STATE = GameStatus.MAIN_MENU
+
+    def default_switch(state: bool) -> None:
+        Default_Cosmetics.state = state
     
     #intializing selections
     BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
@@ -89,7 +97,10 @@ def cos_menu(Screen):
         title='Cosemtics',
         width=800
     )
-
+    if Default_Cosmetics.state:
+        menu.add.toggle_switch(title='Set Default Cosmetics', default=True, onchange=default_switch)
+    else:
+        menu.add.toggle_switch(title='Set Default Cosmetics', default=False, onchange=default_switch)
     menu.add.selector('Background: ', [('Space', 'assets/space_background.jpg', [0, 0], 1.0), ('Haunted', 'assets/haunted_background.jpeg', [-8, 0], 0.56)], onchange=set_background)
     menu.add.selector('Peg: ', [('Space', 'assets/space_peg.png', 0.1), ('Haunted', 'assets/haunted_peg.png', 0.40)], onchange=set_peg)
     menu.add.selector('Ball: ', [('Space', 'assets/space_ball.png', 0.075), ('Haunted', 'assets/haunted_ball.png', 0.15)], onchange=set_ball)
