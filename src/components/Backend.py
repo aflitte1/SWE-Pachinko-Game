@@ -170,6 +170,15 @@ class GameStatus(Enum):
 class CurrentLevel():
     num = 1
 
+class CurrentBackground():
+    num = 1
+
+class CurrentPeg():
+    num = 1
+
+class CurrentBall():
+    num = 1
+
 class GlobalState:
     GAME_STATE = GameStatus.MAIN_MENU
 

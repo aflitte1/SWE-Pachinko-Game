@@ -109,7 +109,6 @@ def main():
             case bnd.GameStatus.COS_LEVEL:
                 Space.gravity = (0, 300)
                 if not level_start:
-                    #GamePhases.level_four()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
