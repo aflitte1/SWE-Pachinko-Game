@@ -101,11 +101,9 @@ def level_select_phase(Screen):
             elif RIGHT_BUTTON.checkForInput(MENU_MOUSE_POS):
                 if CurrentLevel.num != 4:
                     CurrentLevel.num = CurrentLevel.num + 1
-                    print("Current Level is now", CurrentLevel.num)
             elif LEFT_BUTTON.checkForInput(MENU_MOUSE_POS):
                 if CurrentLevel.num != 1:
                     CurrentLevel.num = CurrentLevel.num - 1
-                    print("Current Level is now", CurrentLevel.num)
 
 
 def level_one():
