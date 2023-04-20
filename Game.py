@@ -5,6 +5,7 @@ import numpy as np
 import src.components.Backend as bnd
 import src.components.game_phases as GamePhases
 from src.components.player import *
+from src.components.music import MusicService
 
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
@@ -85,6 +86,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_2:
@@ -113,12 +115,15 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_4:
+                GamePhases.level_four()
+
+            case bnd.GameStatus.COS_LEVEL:
                 Space.gravity = (0, 300)
                 if not level_start:
-                    GamePhases.level_four()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
@@ -138,6 +143,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.COS_MENU:
@@ -154,6 +160,8 @@ def main():
             P1.draw(Screen)
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
+                    for i in range(len(Pegs)):
+                        Space.remove(Pegs[i])
                     Pegs.clear()
                     ball_count = 0
                     ball_pos = 0
