@@ -5,6 +5,7 @@ import numpy as np
 import src.components.Backend as bnd
 import src.components.game_phases as GamePhases
 from src.components.player import *
+from src.components.music import MusicService
 
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
@@ -70,6 +71,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_2:
@@ -98,6 +100,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_4:
@@ -126,6 +129,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.COS_MENU:
