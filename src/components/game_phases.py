@@ -182,8 +182,8 @@ def level_one() -> None:
     MusicService.stop_music()
     MusicService.start_level_1_music()
     if Default_Cosmetics.state:
-        BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
-        PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+        BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.05)
+        PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.05)
         BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
 
@@ -233,8 +233,8 @@ def cos_menu(Screen):
         Default_Cosmetics.state = state
     
     #intializing selections
-    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
-    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.05)
+    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.05)
     BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
     menu = pygame_menu.Menu(
@@ -248,8 +248,8 @@ def cos_menu(Screen):
     else:
         menu.add.toggle_switch(title='Set Default Cosmetics', default=False, onchange=default_switch)
     menu.add.selector('Background: ', [('Space', 'assets/space_background.jpg', [0, 0], 1.0), ('Haunted', 'assets/haunted_background.jpeg', [-8, 0], 0.56)], onchange=set_background)
-    menu.add.selector('Peg: ', [('Space', 'assets/space_peg.png', 0.1), ('Haunted', 'assets/haunted_peg.png', 0.40)], onchange=set_peg)
-    menu.add.selector('Ball: ', [('Space', 'assets/space_ball.png', 0.075), ('Haunted', 'assets/haunted_ball.png', 0.15)], onchange=set_ball)
+    menu.add.selector('Peg: ', [('Space', 'assets/space_peg.png', 0.05), ('Haunted', 'assets/haunted_peg.png', 0.40)], onchange=set_peg)
+    menu.add.selector('Ball: ', [('Space', 'assets/space_ball.png', 0.05), ('Haunted', 'assets/haunted_ball.png', 0.15)], onchange=set_ball)
     menu.add.button('Play', menu_play)
     menu.add.button('Back', menu_quit)
     menu.mainloop(Screen)
