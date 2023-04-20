@@ -153,7 +153,6 @@ def main():
 
             case bnd.GameStatus.COS_MENU:
                 GamePhases.cos_menu(Screen)
-
         if bnd.GlobalState.GAME_STATE not in {bnd.GameStatus.MAIN_MENU, bnd.GameStatus.COS_MENU, bnd.GameStatus.LEVEL_SELECT}:
             Screen.fill((217, 217, 217))
             Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
