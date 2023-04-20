@@ -54,18 +54,33 @@ def main():
                 Space.gravity = (0, 100)
                 if not level_start:
                     GamePhases.level_one()
-                    for i in range(10):
-                        x_pos = np.random.uniform(20, 780)
-                        y_pos = np.random.uniform(40, 700)
-                        Pegs.append(bnd.create_peg(
-                            Space, (x_pos, y_pos), 25, 0.5))
+                    # Right side
+                    Pegs.append(bnd.create_peg(Space, (125, 200), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (225, 300), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (175, 450), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (325, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (125, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (275, 650), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (200, 550), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (75, 500), 10, 0.5))
+                    # Mid
+                    Pegs.append(bnd.create_peg(Space, (400, 500), 10, 0.5))
+                    # Left side
+                    Pegs.append(bnd.create_peg(Space, (675, 200), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (575, 300), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (625, 450), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (475, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (675, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (525, 650), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (725, 500), 10, 0.5))
                     level_start = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        ball_sprite = bnd.Ball(x_pos, Space, 40, 2)
+                        ball_sprite = bnd.Ball(x_pos, Space, 26.6, 2)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1

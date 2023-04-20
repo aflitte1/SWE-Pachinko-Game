@@ -115,7 +115,6 @@ def level_one() -> None:
     PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
     BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
-
 def level_two() -> None:
     MusicService.stop_music()
     MusicService.start_level_2_music()
@@ -239,4 +238,3 @@ def cos_menu(Screen):
             elif LEFT_BUTTON3.checkForInput(COS_MOUSE_POS):
                 if CurrentBall.num != 1:
                     CurrentBall.num = CurrentBall.num - 1
-             
