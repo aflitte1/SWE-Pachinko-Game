@@ -35,6 +35,7 @@ def main():
     ball_pos = 0
     level_start = False
     score = 0
+    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
     bnd.Default_Cosmetics.state = True
     bnd.create_borders(Space)
     while True:
@@ -73,6 +74,7 @@ def main():
                 if bnd.collide(P1, Balls):
                     MusicService.score_increase()
                     score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.LEVEL_2:
                 GamePhases.level_two()
@@ -102,6 +104,7 @@ def main():
                 if bnd.collide(P1, Balls):
                     MusicService.score_increase()
                     score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.LEVEL_4:
                 GamePhases.level_four()
@@ -130,6 +133,7 @@ def main():
                 if bnd.collide(P1, Balls):
                     MusicService.score_increase()
                     score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.COS_MENU:
                 GamePhases.cos_menu(Screen)
@@ -143,6 +147,11 @@ def main():
             bnd.draw_peg(Screen, Pegs)
             P1.move()
             P1.draw(Screen)
+            SCORE_TEXT = bnd.get_font(20).render("Score", True, "#b68f40")
+            SCORE_RECT = SCORE_TEXT.get_rect(center=(740, 50))
+            SCORE_VAL_RECT = SCORE_VAL_TEXT.get_rect(center=(750, 90))
+            Screen.blit(SCORE_TEXT, SCORE_RECT)
+            Screen.blit(SCORE_VAL_TEXT, SCORE_VAL_RECT)
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
                     for i in range(len(Pegs)):
@@ -152,6 +161,7 @@ def main():
                     ball_pos = 0
                     level_start = False
                     score = 0
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             for ball in Balls:
                 if (bnd.delete_ball(ball.phys.body.position.y)):
