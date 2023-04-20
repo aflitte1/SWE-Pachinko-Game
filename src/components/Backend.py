@@ -163,8 +163,9 @@ class GameStatus(Enum):
     LEVEL_2 = 2
     LEVEL_3 = 3
     LEVEL_4 = 4
-    COS_MENU = 5
-    LEVEL_SELECT = 6
+    COS_LEVEL = 5
+    COS_MENU = 6
+    LEVEL_SELECT = 7
 
 class CurrentLevel():
     num = 1
