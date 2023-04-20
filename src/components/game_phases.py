@@ -111,8 +111,8 @@ def level_one() -> None:
     # The background image will eventually become a global variable dependent on cosmetics
     MusicService.stop_music()
     MusicService.start_level_1_music()
-    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
-    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.1)
+    BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.05)
+    PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.05)
     BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
 def level_two() -> None:
