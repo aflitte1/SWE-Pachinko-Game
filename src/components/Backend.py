@@ -5,6 +5,8 @@ import pymunk
 from enum import Enum
 from src.components.music import MusicService
 
+from src.components.leaderboard import *
+
 vec = pygame.math.Vector2
 
 def create_ball(space, pos, size, elastic) -> pymunk.Circle:
@@ -126,6 +128,11 @@ def game_over(Screen, score, total):
     Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
     Screen.blit(SCORE_TEXT, SCORE_RECT)
 
+    if(UpdateLeaderboardBool.update):
+        update_leaderboard(CurrentLevel.num, str(score), Username.name)
+        UpdateLeaderboardBool.update = False
+        
+
     PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400),
                              text_input="PLAY AGAIN", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
     MENU_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
@@ -165,12 +172,21 @@ class GameStatus(Enum):
     LEVEL_4 = 4
     COS_MENU = 5
     LEVEL_SELECT = 6
+    LEADERBOARD = 7
+    TITLE_SCREEN = 8
 
-class CurrentLevel():
+class CurrentLevel:
     num = 1
 
+class Username:
+     name = ""
+
+class UpdateLeaderboardBool:
+    update = bool
+    read_bool = bool
+
 class GlobalState:
-    GAME_STATE = GameStatus.MAIN_MENU
+    GAME_STATE = GameStatus.TITLE_SCREEN
 
 class Default_Cosmetics:
     state = bool
