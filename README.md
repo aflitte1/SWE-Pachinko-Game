@@ -9,8 +9,6 @@
 
 ## Table of Contents
 
-## Revision History
-
 - 1. Introduction
    - 1.1 Purpose
    - 1.2 Intended Audience and Reading Suggestions
