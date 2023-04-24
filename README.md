@@ -1,6 +1,4 @@
-# Software Requirements Specification
-# for
-# Physics Based Pachinko
+# Software Requirements Specification for Physics Based Pachinko
 
 ### Prepared by Alex Flitter, Dan Cleaver, Christian Lostoski, Keenan Long
 
@@ -60,21 +58,18 @@ the ball and the basket as well as physics simulation software through a game en
 ## 2. System Features
 
 ### 2.1 Main Menu
-
-```
-2.1.1 Description and Priority - Priority 2
-This menu has two buttons. The first button will be the PLAY button. Once pressed, the game will
-begin. When pressing the LEFT or RIGHT arrow keys, the game's level will change. The
-background of the main menu will change depending on what level is selected. The second
-button will be a cosmetics button. This will again open a submenu that will allow the user to
-alter several cosmetic options in the game. On the side of the main menu will be the
-leaderboard for the currently selected level. This will be the main controlling menu of the
-game, so this is a high priority, but not as high a priority as the actual levels themselves.
-2.1.2 Stimulus/Response Sequences
-If the user presses the PLAY button, the level will begin and the player can play the game. If the user
-presses LEFT or RIGHT the level will change. If the COSMETIC button is pressed, the
-cosmetics menu will appear.
-```
+ - 2.1.1 Description and Priority - Priority 2
+   This menu has two buttons. The first button will be the PLAY button. Once pressed, the game will
+   begin. When pressing the LEFT or RIGHT arrow keys, the game's level will change. The
+   background of the main menu will change depending on what level is selected. The second
+   button will be a cosmetics button. This will again open a submenu that will allow the user to
+   alter several cosmetic options in the game. On the side of the main menu will be the
+   leaderboard for the currently selected level. This will be the main controlling menu of the
+   game, so this is a high priority, but not as high a priority as the actual levels themselves.
+ - 2.1.2 Stimulus/Response Sequences
+   If the user presses the PLAY button, the level will begin and the player can play the game. If the user
+   presses LEFT or RIGHT the level will change. If the COSMETIC button is pressed, the
+   cosmetics menu will appear.
 
 ```
 2.1.3 Functional Requirements
