@@ -30,11 +30,13 @@ def update_game_display():
 def main():
     Balls = []
     Pegs = []
-    ball_max = 29
+    ball_max = 6
     ball_count = 0
     ball_pos = 0
     level_start = False
     score = 0
+    bnd.read_to_file()
+    bnd.UpdateLeaderboardBool.update = True
     bnd.Default_Cosmetics.state = True
     bnd.create_borders(Space)
     while True:
@@ -44,12 +46,14 @@ def main():
                 sys.exit()
 
         match bnd.GlobalState.GAME_STATE:
+            case bnd.GameStatus.TITLE_SCREEN:
+                GamePhases.title_screen_phase(Screen)
             case bnd.GameStatus.MAIN_MENU:
                 GamePhases.main_menu_phase(Screen)
-
             case bnd.GameStatus.LEVEL_SELECT:
                 GamePhases.level_select_phase(Screen)
-
+            case bnd.GameStatus.LEADERBOARD:
+                GamePhases.leaderboard_phase(Screen)
             case bnd.GameStatus.LEVEL_1:
                 Space.gravity = (0, 100)
                 if not level_start:
@@ -75,6 +79,7 @@ def main():
                     Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.5))
                     Pegs.append(bnd.create_peg(Space, (725, 500), 10, 0.5))
                     level_start = True
+                    bnd.UpdateLeaderboardBool.update = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 250)
@@ -103,6 +108,7 @@ def main():
                     Pegs.append(bnd.create_peg(Space, (325, 225), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (625, 250), 43, 0.5))
                     level_start = True
+                    bnd.UpdateLeaderboardBool.update = True
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 50)
@@ -149,10 +155,9 @@ def main():
             case bnd.GameStatus.COS_MENU:
                 GamePhases.cos_menu(Screen)
 
-        if bnd.GlobalState.GAME_STATE not in {bnd.GameStatus.MAIN_MENU, bnd.GameStatus.COS_MENU, bnd.GameStatus.LEVEL_SELECT}:
+        if bnd.GlobalState.GAME_STATE not in {bnd.GameStatus.MAIN_MENU, bnd.GameStatus.COS_MENU, bnd.GameStatus.LEVEL_SELECT, bnd.GameStatus.LEADERBOARD, bnd.GameStatus.TITLE_SCREEN}:
             Screen.fill((217, 217, 217))
-            Screen.blit(bnd.BackGround.IMAGE.image,
-                        bnd.BackGround.IMAGE.rect)
+            Screen.blit(bnd.BackGround.IMAGE.image,bnd.BackGround.IMAGE.rect)
             for i in range(len(Balls)):
                 Balls[i].draw(Screen)
             bnd.draw_peg(Screen, Pegs)
