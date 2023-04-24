@@ -30,7 +30,7 @@ def update_game_display():
 def main():
     Balls = []
     Pegs = []
-    ball_max = 6
+    ball_max = 30
     ball_count = 0
     ball_pos = 0
     level_start = False
@@ -157,7 +157,7 @@ def main():
 
         if bnd.GlobalState.GAME_STATE not in {bnd.GameStatus.MAIN_MENU, bnd.GameStatus.COS_MENU, bnd.GameStatus.LEVEL_SELECT, bnd.GameStatus.LEADERBOARD, bnd.GameStatus.TITLE_SCREEN}:
             Screen.fill((217, 217, 217))
-            Screen.blit(bnd.BackGround.IMAGE.image,bnd.BackGround.IMAGE.rect)
+            Screen.blit(bnd.BackGround.IMAGE.image, bnd.BackGround.IMAGE.rect)
             for i in range(len(Balls)):
                 Balls[i].draw(Screen)
             bnd.draw_peg(Screen, Pegs)
