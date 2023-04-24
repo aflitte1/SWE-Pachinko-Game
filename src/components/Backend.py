@@ -185,6 +185,15 @@ class UpdateLeaderboardBool:
     update = bool
     read_bool = bool
 
+class CurrentBackground():
+    num = 1
+
+class CurrentPeg():
+    num = 1
+
+class CurrentBall():
+    num = 1
+
 class GlobalState:
     GAME_STATE = GameStatus.TITLE_SCREEN
 

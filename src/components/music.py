@@ -50,3 +50,8 @@ class MusicService:
         pygame.mixer.music.stop()
         pygame.mixer.music.unload()
         return
+    
+    def score_increase():
+        filename = MUSIC_DIR / "score_increase.mp3"
+        sound = pygame.mixer.Sound(filename)
+        pygame.mixer.Channel(0).play(sound)

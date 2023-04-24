@@ -5,6 +5,7 @@ import numpy as np
 import src.components.Backend as bnd
 import src.components.game_phases as GamePhases
 from src.components.player import *
+from src.components.music import MusicService
 
 pygame.init()
 Screen = pygame.display.set_mode((800, 800))
@@ -57,11 +58,26 @@ def main():
                 Space.gravity = (0, 100)
                 if not level_start:
                     GamePhases.level_one()
-                    for i in range(10):
-                        x_pos = np.random.uniform(20, 780)
-                        y_pos = np.random.uniform(40, 700)
-                        Pegs.append(bnd.create_peg(
-                            Space, (x_pos, y_pos), 25, 0.5))
+                    # Right side
+                    Pegs.append(bnd.create_peg(Space, (125, 200), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (225, 300), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (175, 450), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (325, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (125, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (275, 650), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (200, 550), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (75, 500), 10, 0.5))
+                    # Mid
+                    Pegs.append(bnd.create_peg(Space, (400, 500), 10, 0.5))
+                    # Left side
+                    Pegs.append(bnd.create_peg(Space, (675, 200), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (575, 300), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (625, 450), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (475, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (675, 350), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (525, 650), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (725, 500), 10, 0.5))
                     level_start = True
                     bnd.UpdateLeaderboardBool.update = True
 
@@ -69,12 +85,13 @@ def main():
                     spawn_ball = np.random.randint(0, 250)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        ball_sprite = bnd.Ball(x_pos, Space, 40, 2)
+                        ball_sprite = bnd.Ball(x_pos, Space, 26.6, 2)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_2:
@@ -104,12 +121,15 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.LEVEL_4:
+                GamePhases.level_four()
+
+            case bnd.GameStatus.COS_LEVEL:
                 Space.gravity = (0, 300)
                 if not level_start:
-                    GamePhases.level_four()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
@@ -129,6 +149,7 @@ def main():
                         ball_count += 1
 
                 if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
                     score += 1
 
             case bnd.GameStatus.COS_MENU:
@@ -144,6 +165,8 @@ def main():
             P1.draw(Screen)
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
+                    for i in range(len(Pegs)):
+                        Space.remove(Pegs[i])
                     Pegs.clear()
                     ball_count = 0
                     ball_pos = 0
