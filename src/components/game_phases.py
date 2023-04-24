@@ -115,10 +115,12 @@ def level_one() -> None:
     PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.05)
     BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
 
-def level_two() -> None:
+def level_two(ball_size, peg_size) -> None:
     MusicService.stop_music()
     MusicService.start_level_2_music()
-    BackGround.IMAGE = Background('assets/2.jpg', [0, 0], 1.5)
+    BallSurface.SURFACE = ball_look('assets/medieval_ball.png', ball_size / 1439 * 2)
+    PegSurface.SURFACE = ball_look('assets/medieval_peg.png', peg_size / 812 * 2)
+    BackGround.IMAGE = Background('assets/medieval_background.jpg', [0, 0], 800 / 1776)
 
 
 def level_three() -> None:

@@ -90,7 +90,50 @@ def main():
                     score += 1
 
             case bnd.GameStatus.LEVEL_2:
-                GamePhases.level_two()
+                Space.gravity = (0, 100)
+
+                if not level_start:
+                    level_start = True
+
+                    ball_size = 25
+                    peg_size = 20
+
+                    GamePhases.level_two(ball_size=ball_size, peg_size=peg_size)
+
+                    # Right side
+                    Pegs.append(bnd.create_peg(Space, (125, 200), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (225, 300), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (175, 450), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (325, 350), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (125, 350), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (275, 650), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (200, 550), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (75, 500), peg_size, 0.5))
+                    # Mid
+                    Pegs.append(bnd.create_peg(Space, (400, 500), peg_size, 0.5))
+                    # Left side
+                    Pegs.append(bnd.create_peg(Space, (675, 200), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (575, 300), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (625, 450), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (475, 350), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (675, 350), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (525, 650), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (600, 550), peg_size, 0.5))
+                    Pegs.append(bnd.create_peg(Space, (725, 500), peg_size, 0.5))
+                    # Create pegs here
+
+                if ball_count <= ball_max:
+                    spawn_ball = np.random.randint(0, 250)
+                    if spawn_ball == 0:
+                        x_pos = np.random.uniform(20, 780)
+                        ball_sprite = bnd.Ball(x_pos, Space, ball_size, 1) #TODO change to 1
+                        Balls.append(ball_sprite)
+                        all_balls.add(ball_sprite)
+                        ball_count += 1
+
+                if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
+                    score += 1
 
             case bnd.GameStatus.LEVEL_3:
                 Space.gravity = (0, 300)
