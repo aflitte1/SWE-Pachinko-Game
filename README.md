@@ -1,9 +1,5 @@
-# Software Requirements
-
-# Specification
-
-## for
-
+# Software Requirements Specification
+# for
 # Physics Based Pachinko
 
 ### Prepared by Alex Flitter, Dan Cleaver, Christian Lostoski, Keenan Long
