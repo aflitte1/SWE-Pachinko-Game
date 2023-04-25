@@ -24,7 +24,6 @@ def title_screen_phase(Screen):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 Username.name = Username.name[:-1]
-                print("In backspace")
             elif event.key == pygame.K_RETURN:
                 for ii in range(20):
                     BackGround.IMAGE = Background(
@@ -34,7 +33,6 @@ def title_screen_phase(Screen):
                     pygame.display.update()
                 GlobalState.GAME_STATE = GameStatus.MAIN_MENU
             else:
-                print("Trying to add a character")
                 if (len(Username.name) < 4):
                     Username.name = Username.name + event.unicode
 

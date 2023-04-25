@@ -22,16 +22,12 @@ def putscore(userscore, level):
     # checks to see if it is the first score
     if len(scores[level-1]) == 0:
         scores[level-1].append(userscore)
-        high_score()
-    # if it is not the first score, we need to find where it goes
+        # if it is not the first score, we need to find where it goes
     else:
         # the number of scores currently in,
         temp_higher = len(scores[level-1])
-        print(temp_higher, ":temp_higher before for loop")
         # I iterate backwards, but I don't think you need to
         for ii in range(len(scores[level-1]), 0, -1):
-            print(userscore[1], ":userscore 1")
-            print(scores[level-1][ii - 1][1], ":scores[ii]")
             # if the score we just got is higher than the past score, we place it lower in the list by 1
             if int(userscore[1]) >= int(scores[level-1][ii - 1][1]):
                 temp_higher -= 1
@@ -39,8 +35,6 @@ def putscore(userscore, level):
             high_score()
         # we need to add it to the list
         if temp_higher != 10:
-            print(temp_higher, ":temp_higher after for loop")
-            print("THIS IS USERSCORE", userscore)
             scores[level-1].insert(temp_higher, userscore)
         # if we have more than 10 scores delete the lowest one
         if len(scores[level-1]) == 11:
@@ -78,10 +72,6 @@ def read_to_file():
                     temp_score = file1.readline()
                     temp_score = temp_score[:-1]
             file1.close()
-
-
-def high_score():
-    print("New highscore! WOW")
 
 
 # Note Level should be 1,2,3,4

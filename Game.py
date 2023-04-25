@@ -28,7 +28,7 @@ all_sprites.add(P1)
 
 def update_game_display():
     pygame.display.update()
-    Clock.tick(120)
+    Clock.tick(80)
     Space.step(1/50)  # Updating time for physics sim
 
 
