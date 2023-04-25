@@ -11,7 +11,7 @@ from pygame.locals import *
 flags = DOUBLEBUF
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
-pygame.event.set_allowed([QUIT, MOUSEBUTTONDOWN])
+pygame.event.set_allowed([QUIT, MOUSEBUTTONDOWN, KEYDOWN])
 Screen = pygame.display.set_mode((800, 800), flags)
 Clock = pygame.time.Clock()
 Space = pymunk.Space()
