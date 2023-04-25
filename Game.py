@@ -6,11 +6,16 @@ import src.components.Backend as bnd
 import src.components.game_phases as GamePhases
 from src.components.player import *
 from src.components.music import MusicService
+from pygame.locals import *
 
+flags = DOUBLEBUF
+pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
-Screen = pygame.display.set_mode((800, 800))
+pygame.event.set_allowed([QUIT, MOUSEBUTTONDOWN])
+Screen = pygame.display.set_mode((800, 800), flags)
 Clock = pygame.time.Clock()
 Space = pymunk.Space()
+
 
 # Sprite Setup
 P1 = Player()
@@ -39,7 +44,7 @@ def main():
     bnd.UpdateLeaderboardBool.update = True
     bnd.Default_Cosmetics.state = True
     bnd.create_borders(Space)
-    while True:
+    while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

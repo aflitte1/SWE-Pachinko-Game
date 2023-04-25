@@ -6,8 +6,9 @@ from enum import Enum
 from src.components.music import MusicService
 from src.components.leaderboard import *
 
+flags = DOUBLEBUF
 pygame.display.init()
-pygame.display.set_mode((800, 800))
+pygame.display.set_mode((800, 800), flags)
 
 vec = pygame.math.Vector2
 

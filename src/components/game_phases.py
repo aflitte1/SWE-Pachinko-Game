@@ -1,12 +1,14 @@
 import sys
 import pygame
+from pygame.locals import *
 from src.components.Backend import *
 from src.components.music import MusicService
 from typing import Tuple, Any
 import time
 
+flags = DOUBLEBUF
 pygame.display.init()
-pygame.display.set_mode((800, 800))
+pygame.display.set_mode((800, 800), flags)
 
 def title_screen_phase(Screen):
     #BackGround.IMAGE = Background('assets/arcade_cabinet_background.jpg', [0, 0], 2.2)
