@@ -5,6 +5,9 @@ from src.components.music import MusicService
 from typing import Tuple, Any
 import time
 
+pygame.display.init()
+pygame.display.set_mode((800, 800))
+
 def title_screen_phase(Screen):
     #BackGround.IMAGE = Background('assets/arcade_cabinet_background.jpg', [0, 0], 2.2)
     #Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
@@ -138,16 +141,16 @@ def level_select_phase(Screen):
     match CurrentLevel.num:
                     case 1:
                         LEVEL_SELECT_TEXT = get_font(50).render("Level 1", True, "#b68f40")
-                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/space_background.jpg"),(500,500)), [150,150])
+                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/space_background.jpg").convert(),(500,500)), [150,150])
                     case 2:
                         LEVEL_SELECT_TEXT = get_font(50).render("Level 2", True, "#b68f40")
-                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/2.jpg"),(500,500)), [150,150])#REPLACE WITH LEVEL 2 BACKGROUND
+                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/2.jpg").convert(),(500,500)), [150,150])#REPLACE WITH LEVEL 2 BACKGROUND
                     case 3:
                         LEVEL_SELECT_TEXT = get_font(50).render("Level 3", True, "#b68f40")
-                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg"),(500,500)), [150,150])
+                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg").convert(),(500,500)), [150,150])
                     case 4:
                         LEVEL_SELECT_TEXT = get_font(50).render("Level 4", True, "#b68f40")
-                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(500,500)), [150,150])#REPLACE WITH LEVEL 4 BACKGROUND
+                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg").convert(),(500,500)), [150,150])#REPLACE WITH LEVEL 4 BACKGROUND
 
     LEVEL_SELECT_RECT = LEVEL_SELECT_TEXT.get_rect(center=(400, 100))
     Screen.blit(LEVEL_SELECT_TEXT, LEVEL_SELECT_RECT)
@@ -291,15 +294,15 @@ def cos_menu(Screen):
 
     match CurrentBackground.num:
         case 1:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/space_background.jpg"),(150,150)), [500,125])
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/space_background.jpg").convert(),(150,150)), [500,125])
             BackGround.IMAGE = Background('assets/space_background.jpg', [0, 0], 1.0)
         case 2:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/2.jpg"),(150,150)), [500,125])#REPLACE WITH LEVEL 2 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/2.jpg").convert(),(150,150)), [500,125])#REPLACE WITH LEVEL 2 BACKGROUND
         case 3:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg"),(150,150)), [500,125])
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg").convert(),(150,150)), [500,125])
             BackGround.IMAGE = Background('assets/haunted_background.jpeg', [-8, 0], 0.56)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(150,150)), [500,125])#REPLACE WITH LEVEL 4 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg").convert(),(150,150)), [500,125])#REPLACE WITH LEVEL 4 BACKGROUND
 
     match CurrentPeg.num:
         case 1:
