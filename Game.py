@@ -60,7 +60,7 @@ def main():
             case bnd.GameStatus.LEADERBOARD:
                 GamePhases.leaderboard_phase(Screen)
             case bnd.GameStatus.LEVEL_1:
-                Space.gravity = (0, 100)
+                Space.gravity = (0, 80)
                 if not level_start:
                     GamePhases.level_one()
                     # Right side

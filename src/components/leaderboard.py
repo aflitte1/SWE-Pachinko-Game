@@ -22,6 +22,7 @@ def putscore(userscore, level):
     # checks to see if it is the first score
     if len(scores[level-1]) == 0:
         scores[level-1].append(userscore)
+
         # if it is not the first score, we need to find where it goes
     else:
         # the number of scores currently in,
@@ -31,8 +32,6 @@ def putscore(userscore, level):
             # if the score we just got is higher than the past score, we place it lower in the list by 1
             if int(userscore[1]) >= int(scores[level-1][ii - 1][1]):
                 temp_higher -= 1
-        if temp_higher == 0:
-            high_score()
         # we need to add it to the list
         if temp_higher != 10:
             scores[level-1].insert(temp_higher, userscore)
