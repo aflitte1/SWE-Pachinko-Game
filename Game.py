@@ -148,7 +148,7 @@ def main():
                     score += 1
 
             case bnd.GameStatus.LEVEL_3:
-                Space.gravity = (0, 300)
+                Space.gravity = (0, 200)
                 if not level_start:
                     GamePhases.level_three()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
@@ -161,7 +161,7 @@ def main():
                     bnd.UpdateLeaderboardBool.update = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 50)
+                    spawn_ball = np.random.randint(0, 75)
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
@@ -179,7 +179,7 @@ def main():
                 GamePhases.level_four()
 
             case bnd.GameStatus.COS_LEVEL:
-                Space.gravity = (0, 300)
+                Space.gravity = (0, 200)
                 if not level_start:
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
@@ -190,7 +190,7 @@ def main():
                     level_start = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 50)
+                    spawn_ball = np.random.randint(0, 75)
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
