@@ -4,8 +4,11 @@ import sys
 import pymunk
 from enum import Enum
 from src.components.music import MusicService
-
 from src.components.leaderboard import *
+
+flags = DOUBLEBUF
+pygame.display.init()
+pygame.display.set_mode((800, 800), flags)
 
 vec = pygame.math.Vector2
 
@@ -158,7 +161,7 @@ def game_over(Screen, score, total):
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location, scale):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(image_file)
+        self.image = pygame.image.load(image_file).convert()
         self.image = pygame.transform.rotozoom(self.image, 0, scale)
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location

@@ -6,11 +6,16 @@ import src.components.Backend as bnd
 import src.components.game_phases as GamePhases
 from src.components.player import *
 from src.components.music import MusicService
+from pygame.locals import *
 
+flags = DOUBLEBUF
+pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
-Screen = pygame.display.set_mode((800, 800))
+pygame.event.set_allowed([QUIT, MOUSEBUTTONDOWN, KEYDOWN])
+Screen = pygame.display.set_mode((800, 800), flags)
 Clock = pygame.time.Clock()
 Space = pymunk.Space()
+
 
 # Sprite Setup
 P1 = Player()
@@ -23,7 +28,7 @@ all_sprites.add(P1)
 
 def update_game_display():
     pygame.display.update()
-    Clock.tick(120)
+    Clock.tick(80)
     Space.step(1/50)  # Updating time for physics sim
 
 
@@ -40,7 +45,7 @@ def main():
     SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
     bnd.Default_Cosmetics.state = True
     bnd.create_borders(Space)
-    while True:
+    while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -56,7 +61,7 @@ def main():
             case bnd.GameStatus.LEADERBOARD:
                 GamePhases.leaderboard_phase(Screen)
             case bnd.GameStatus.LEVEL_1:
-                Space.gravity = (0, 100)
+                Space.gravity = (0, 80)
                 if not level_start:
                     GamePhases.level_one()
                     # Right side
@@ -143,7 +148,7 @@ def main():
                     score += 1
 
             case bnd.GameStatus.LEVEL_3:
-                Space.gravity = (0, 300)
+                Space.gravity = (0, 200)
                 if not level_start:
                     GamePhases.level_three()
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
@@ -156,7 +161,7 @@ def main():
                     bnd.UpdateLeaderboardBool.update = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 50)
+                    spawn_ball = np.random.randint(0, 75)
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
@@ -212,7 +217,7 @@ def main():
                     SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.COS_LEVEL:
-                Space.gravity = (0, 300)
+                Space.gravity = (0, 200)
                 if not level_start:
                     Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
                     Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
@@ -223,7 +228,7 @@ def main():
                     level_start = True
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 50)
+                    spawn_ball = np.random.randint(0, 75)
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
