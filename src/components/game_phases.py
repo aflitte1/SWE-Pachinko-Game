@@ -333,8 +333,7 @@ def cos_menu(Screen):
             BackGround.IMAGE = Background(
                 'assets/haunted_background.jpeg', [-8, 0], 0.56)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/city_background.jpg").convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 4 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_background.jpg").convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 4 BACKGROUND
             BackGround.IMAGE = Background('assets/city_background.jpg', [-250, 0], .7)
 
     match CurrentPeg.num:
