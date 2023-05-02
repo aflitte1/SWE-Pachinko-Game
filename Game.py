@@ -166,6 +166,7 @@ def main():
                 if bnd.collide(P1, Balls):
                     MusicService.score_increase()
                     score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.LEVEL_3:
                 Space.gravity = (0, 200)
@@ -197,7 +198,45 @@ def main():
                         str(score), True, "#b68f40")
 
             case bnd.GameStatus.LEVEL_4:
-                GamePhases.level_four()
+                Space.gravity = (0, 400)
+                if not level_start:
+                    GamePhases.level_four()
+                    # Right side
+                    Pegs.append(bnd.create_peg(Space, (125, 200), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (225, 300), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (325, 350), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (125, 350), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (275, 650), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (200, 550), 10, 0.1))
+
+                    Pegs.append(bnd.create_peg(Space, (325, 225), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (400, 200), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (475, 225), 10, 0.1))
+
+                    # Left side
+                    Pegs.append(bnd.create_peg(Space, (675, 200), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (575, 300), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (475, 350), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (675, 350), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (525, 650), 10, 0.1))
+                    Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.1))
+
+                    level_start = True
+                    bnd.UpdateLeaderboardBool.update = True
+
+                if ball_count <= ball_max:
+                    spawn_ball = np.random.randint(0, 75)
+                    if spawn_ball == 0:
+                        x_pos = np.random.uniform(100, 700)
+                        ball_sprite = bnd.Ball(x_pos, Space, 26.6, 2)
+                        Balls.append(ball_sprite)
+                        all_balls.add(ball_sprite)
+                        ball_count += 1
+
+                if bnd.collide(P1, Balls):
+                    MusicService.score_increase()
+                    score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.COS_LEVEL:
                 Space.gravity = (0, 200)

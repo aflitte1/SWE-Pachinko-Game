@@ -83,6 +83,8 @@ def update_leaderboard(level, game_score, username):
 
 def format_leaderboard_display(user_score, ii):
     match len(user_score[0]):
+        case 0:
+            name = "    "
         case 1:
             name = user_score[0] + "   "
         case 2:
