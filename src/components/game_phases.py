@@ -147,7 +147,7 @@ def level_select_phase(Screen):
                         Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg"),(500,500)), [150,150])
                     case 4:
                         LEVEL_SELECT_TEXT = get_font(50).render("Level 4", True, "#b68f40")
-                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(500,500)), [150,150])#REPLACE WITH LEVEL 4 BACKGROUND
+                        Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_background.jpg"),(500,500)), [150,150])#REPLACE WITH LEVEL 4 BACKGROUND
 
     LEVEL_SELECT_RECT = LEVEL_SELECT_TEXT.get_rect(center=(400, 100))
     Screen.blit(LEVEL_SELECT_TEXT, LEVEL_SELECT_RECT)
@@ -249,7 +249,9 @@ def level_three() -> None:
 def level_four() -> None:
     MusicService.stop_music()
     MusicService.start_level_4_music()
-    BackGround.IMAGE = Background('assets/4.jpg', [0, 0], 1.5)
+    BackGround.IMAGE = Background('assets/city_background.jpg', [0, 0], .7)
+    BallSurface.SURFACE = ball_look('assets/city_ball.png', 0.06)
+    PegSurface.SURFACE = ball_look('assets/city_peg.png', 0.10)
 
 
 def cos_menu(Screen):
@@ -301,7 +303,7 @@ def cos_menu(Screen):
             Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_background.jpeg"),(150,150)), [500,125])
             BackGround.IMAGE = Background('assets/haunted_background.jpeg', [-8, 0], 0.56)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(150,150)), [500,125])#REPLACE WITH LEVEL 4 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_background.jpg"),(150,150)), [500,125])#REPLACE WITH LEVEL 4 BACKGROUND
 
     match CurrentPeg.num:
         case 1:
@@ -313,7 +315,7 @@ def cos_menu(Screen):
             Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_peg.png"),(150,150)), [500,275])
             PegSurface.SURFACE = ball_look('assets/haunted_peg.png', 0.40)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(150,150)), [500,275])#REPLACE WITH LEVEL 4 PEG
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_peg.png"),(150,150)), [500,275])#REPLACE WITH LEVEL 4 PEG
     
     match CurrentBall.num:
         case 1:
@@ -325,7 +327,7 @@ def cos_menu(Screen):
             Screen.blit(pygame.transform.scale(pygame.image.load("assets/haunted_ball.png"),(150,150)), [500,425])
             BallSurface.SURFACE = ball_look('assets/haunted_ball.png', 0.15)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/4.jpg"),(150,150)), [500,425])#REPLACE WITH LEVEL 4 BALL
+            Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_ball.png"),(150,150)), [500,425])#REPLACE WITH LEVEL 4 BALL
 
 
     for event in pygame.event.get():
