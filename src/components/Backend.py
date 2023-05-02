@@ -12,6 +12,7 @@ pygame.display.set_mode((800, 800), flags)
 
 vec = pygame.math.Vector2
 
+
 def create_ball(space, pos, size, elastic) -> pymunk.Circle:
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
     body.position = pos
@@ -41,7 +42,8 @@ class Ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.phys = create_ball(Space, (x, 0), size, elastic)
-        self.pos = vec((int(self.phys.body.position.x), int(self.phys.body.position.y)))
+        self.pos = vec((int(self.phys.body.position.x),
+                       int(self.phys.body.position.y)))
 
     def draw(self, screen):
         pos_x = int(self.phys.body.position.x)
@@ -107,10 +109,11 @@ def collide(Player, Balls):
         p_bottom = p_pos_y - (p_pixle_h / 2)
 
         if ((((p_right >= b_left) and (p_left < b_left)) or ((p_left <= b_right) and (p_right > b_right)))
-             and (((p_top >= b_bottom) and (p_bottom < b_bottom)))):
+                and (((p_top >= b_bottom) and (p_bottom < b_bottom)))):
             Balls.remove(ball)
             return True
     return False
+
 
 def game_over(Screen, score, total):
     # MusicService.stop_music()
@@ -131,15 +134,14 @@ def game_over(Screen, score, total):
     Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
     Screen.blit(SCORE_TEXT, SCORE_RECT)
 
-    if(UpdateLeaderboardBool.update):
+    if (UpdateLeaderboardBool.update):
         update_leaderboard(CurrentLevel.num, str(score), Username.name)
         UpdateLeaderboardBool.update = False
-        
 
     PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400),
-                             text_input="PLAY AGAIN", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
+                         text_input="PLAY AGAIN", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
     MENU_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
-                             text_input="MAIN MENU", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
+                         text_input="MAIN MENU", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
 
     for button in [PLAY_BUTTON, MENU_BUTTON]:
         button.changeColor(GAME_MOUSE_POS)
@@ -153,6 +155,7 @@ def game_over(Screen, score, total):
             if PLAY_BUTTON.checkForInput(GAME_MOUSE_POS):
                 return True
             if MENU_BUTTON.checkForInput(GAME_MOUSE_POS):
+                MusicService.stop_music()
                 GlobalState.GAME_STATE = GameStatus.MAIN_MENU
                 return True
     return False
@@ -179,27 +182,35 @@ class GameStatus(Enum):
     LEADERBOARD = 8
     TITLE_SCREEN = 9
 
+
 class CurrentLevel:
     num = 1
 
+
 class Username:
-     name = ""
+    name = ""
+
 
 class UpdateLeaderboardBool:
     update = bool
     read_bool = bool
 
+
 class CurrentBackground():
     num = 1
+
 
 class CurrentPeg():
     num = 1
 
+
 class CurrentBall():
     num = 1
 
+
 class GlobalState:
     GAME_STATE = GameStatus.TITLE_SCREEN
+
 
 class Default_Cosmetics:
     state = bool
@@ -216,35 +227,39 @@ class BallSurface:
 class PegSurface:
     SURFACE = ball_look('assets/peg.png', 0.28)
 
-def get_font(size): 
+
+def get_font(size):
     return pygame.font.Font("assets/font.ttf", size)
 
+
 class Button():
-	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
-		self.image = image
-		self.x_pos = pos[0]
-		self.y_pos = pos[1]
-		self.font = font
-		self.base_color, self.hovering_color = base_color, hovering_color
-		self.text_input = text_input
-		self.text = self.font.render(self.text_input, True, self.base_color)
-		if self.image is None:
-			self.image = self.text
-		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
-		self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
+    def __init__(self, image, pos, text_input, font, base_color, hovering_color):
+        self.image = image
+        self.x_pos = pos[0]
+        self.y_pos = pos[1]
+        self.font = font
+        self.base_color, self.hovering_color = base_color, hovering_color
+        self.text_input = text_input
+        self.text = self.font.render(self.text_input, True, self.base_color)
+        if self.image is None:
+            self.image = self.text
+        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+        self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 
-	def update(self, screen):
-		if self.image is not None:
-			screen.blit(self.image, self.rect)
-		screen.blit(self.text, self.text_rect)
+    def update(self, screen):
+        if self.image is not None:
+            screen.blit(self.image, self.rect)
+        screen.blit(self.text, self.text_rect)
 
-	def checkForInput(self, position):
-		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
-			return True
-		return False
+    def checkForInput(self, position):
+        if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
+            return True
+        return False
 
-	def changeColor(self, position):
-		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
-			self.text = self.font.render(self.text_input, True, self.hovering_color)
-		else:
-			self.text = self.font.render(self.text_input, True, self.base_color)
+    def changeColor(self, position):
+        if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
+            self.text = self.font.render(
+                self.text_input, True, self.hovering_color)
+        else:
+            self.text = self.font.render(
+                self.text_input, True, self.base_color)

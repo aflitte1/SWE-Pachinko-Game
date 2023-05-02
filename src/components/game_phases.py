@@ -95,7 +95,6 @@ def draw_title(Screen, x_val):
 
 
 def main_menu_phase(Screen) -> None:
-    MusicService.stop_music()
     MusicService.start_menu_music()
     BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
