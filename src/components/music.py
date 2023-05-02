@@ -35,7 +35,7 @@ class MusicService:
     def start_level_4_music():
         if pygame.mixer.music.get_busy():
             return
-        music = MUSIC_DIR / "level3.ogg"
+        music = MUSIC_DIR / "level4.ogg"
         pygame.mixer.music.load(music)
         pygame.mixer.music.play()
 
