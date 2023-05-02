@@ -146,6 +146,7 @@ def main():
                 if bnd.collide(P1, Balls):
                     MusicService.score_increase()
                     score += 1
+                    SCORE_VAL_TEXT = bnd.get_font(30).render(str(score), True, "#b68f40")
 
             case bnd.GameStatus.LEVEL_3:
                 Space.gravity = (0, 200)
