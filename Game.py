@@ -1,6 +1,7 @@
 import pygame
 import pymunk
 import sys
+import os
 import numpy as np
 import src.components.Backend as bnd
 import src.components.game_phases as GamePhases

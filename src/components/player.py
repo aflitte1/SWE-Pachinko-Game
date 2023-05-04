@@ -1,5 +1,16 @@
+import os
+import sys
 import pygame
 from pygame.locals import *
+
+def resource_path(relative_path):
+    try:
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 vec = pygame.math.Vector2
 ACC = 1.0
@@ -10,7 +21,7 @@ WIDTH = 800
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('assets/bucket.png')
+        self.image = pygame.image.load(resource_path('assets/bucket.png'))
         self.image = pygame.transform.rotozoom(self.image, 0, 0.40)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)

@@ -12,6 +12,15 @@ pygame.display.set_mode((800, 800), flags)
 
 vec = pygame.math.Vector2
 
+def resource_path(relative_path):
+    try:
+    # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 def create_ball(space, pos, size, elastic) -> pymunk.Circle:
     body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
@@ -23,7 +32,7 @@ def create_ball(space, pos, size, elastic) -> pymunk.Circle:
 
 
 def ball_look(file_name, scale) -> pygame.SurfaceType:
-    surface = pygame.image.load(file_name)
+    surface = pygame.image.load(resource_path(file_name))
     surface = pygame.transform.rotozoom(surface, 0, scale)
     return surface
 
@@ -138,9 +147,9 @@ def game_over(Screen, score, total):
         update_leaderboard(CurrentLevel.num, str(score), Username.name)
         UpdateLeaderboardBool.update = False
 
-    PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 400),
+    PLAY_BUTTON = Button(image=pygame.image.load(resource_path("assets/Play Rect.png")), pos=(400, 400),
                          text_input="PLAY AGAIN", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
-    MENU_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
+    MENU_BUTTON = Button(image=pygame.image.load(resource_path("assets/Quit Rect.png")), pos=(400, 550),
                          text_input="MAIN MENU", font=get_font(35), base_color="#d7fcd4", hovering_color="White")
 
     for button in [PLAY_BUTTON, MENU_BUTTON]:
@@ -164,7 +173,7 @@ def game_over(Screen, score, total):
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location, scale):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(image_file).convert()
+        self.image = pygame.image.load(resource_path(image_file)).convert()
         self.image = pygame.transform.rotozoom(self.image, 0, scale)
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location

@@ -38,15 +38,10 @@ def title_screen_phase(Screen):
 
 
 def draw_title(Screen, x_val):
-    Screen.blit(pygame.transform.scale(pygame.image.load(
-        "assets/arcade_cabinet_left.png"), (800, 800)), [0 - x_val, 0])
-    Screen.blit(pygame.transform.scale(pygame.image.load(
-        "assets/arcade_cabinet_right.png"), (800, 800)), [0 + x_val, 0])
-
-    # NAME_REGISTRAITON_TEXT1 = get_font(30).render("ENTER", True, "#b68f40")
-    # NAME_REGISTRAITON_RECT1 = NAME_REGISTRAITON_TEXT1.get_rect(center=(400 - 75 - x_val, 400))
-    # NAME_REGISTRAITON_TEXT2 = get_font(30).render(" NAME", True, "#b68f40")
-    # NAME_REGISTRAITON_RECT2 = NAME_REGISTRAITON_TEXT2.get_rect(center=(400 + 75 + x_val, 400))
+    Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+        "assets/arcade_cabinet_left.png")), (800, 800)), [0 - x_val, 0])
+    Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+        "assets/arcade_cabinet_right.png")), (800, 800)), [0 + x_val, 0])
 
     match len(Username.name):
         case 0:
@@ -102,11 +97,11 @@ def main_menu_phase(Screen) -> None:
     MENU_TEXT = get_font(50).render("MAIN MENU", True, "#b68f40")
     MENU_RECT = MENU_TEXT.get_rect(center=(400, 100))
 
-    LEVEL_SELECT_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 250),
+    LEVEL_SELECT_BUTTON = Button(image=pygame.image.load(resource_path("assets/Options Rect.png")), pos=(400, 250),
                                  text_input="Level Select", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-    OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 400),
+    OPTIONS_BUTTON = Button(image=pygame.image.load(resource_path("assets/Options Rect.png")), pos=(400, 400),
                             text_input="OPTIONS", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-    QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
+    QUIT_BUTTON = Button(image=pygame.image.load(resource_path("assets/Quit Rect.png")), pos=(400, 550),
                          text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     Screen.blit(MENU_TEXT, MENU_RECT)
 
@@ -135,35 +130,35 @@ def level_select_phase(Screen):
     MENU_MOUSE_POS = pygame.mouse.get_pos()
     LEVEL_SELECT_TEXT = get_font(50).render("Level Select", True, "#b68f40")
 
-    PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 720),
+    PLAY_BUTTON = Button(image=pygame.image.load(resource_path("assets/Play Rect.png")), pos=(400, 720),
                          text_input="PLAY", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-    LEADERBOARD_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/leaderboard_button.webp"), (75, 75)), pos=(750, 50),
+    LEADERBOARD_BUTTON = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/leaderboard_button.webp")), (75, 75)), pos=(750, 50),
                                 text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
 
-    BACK_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/back_arrow.png"), (75, 75)), pos=(50, 50),
+    BACK_BUTTON = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/back_arrow.png")), (75, 75)), pos=(50, 50),
                          text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    RIGHT_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/right_button.png"), (100, 100)), pos=(725, 400),
+    RIGHT_BUTTON = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/right_button.png")), (100, 100)), pos=(725, 400),
                           text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    LEFT_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/left_button.png"), (100, 100)), pos=(75, 400),
+    LEFT_BUTTON = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/left_button.png")), (100, 100)), pos=(75, 400),
                          text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
 
     match CurrentLevel.num:
         case 1:
             LEVEL_SELECT_TEXT = get_font(50).render("Level 1", True, "#b68f40")
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/space_background.jpg").convert(), (500, 500)), [150, 150])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/space_background.jpg")).convert(), (500, 500)), [150, 150])
         case 2:
             LEVEL_SELECT_TEXT = get_font(50).render("Level 2", True, "#b68f40")
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/medieval_background.jpg").convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 2 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/medieval_background.jpg")).convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 2 BACKGROUND
         case 3:
             LEVEL_SELECT_TEXT = get_font(50).render("Level 3", True, "#b68f40")
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/haunted_background.jpeg").convert(), (500, 500)), [150, 150])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/haunted_background.jpeg")).convert(), (500, 500)), [150, 150])
         case 4:
             LEVEL_SELECT_TEXT = get_font(50).render("Level 4", True, "#b68f40")
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/city_background.jpg").convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 4 BACKGROUND
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/city_background.jpg")).convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 4 BACKGROUND
 
     LEVEL_SELECT_RECT = LEVEL_SELECT_TEXT.get_rect(center=(400, 100))
     Screen.blit(LEVEL_SELECT_TEXT, LEVEL_SELECT_RECT)
@@ -208,7 +203,7 @@ def leaderboard_phase(Screen):
     LEVEL_SELECT_RECT = LEADERBOARD_TEXT.get_rect(center=(400, 100))
     Screen.blit(LEADERBOARD_TEXT, LEVEL_SELECT_RECT)
 
-    BACK_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/back_arrow.png"), (75, 75)), pos=(50, 50),
+    BACK_BUTTON = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/back_arrow.png")), (75, 75)), pos=(50, 50),
                          text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
 
     for ii in range(len(scores[CurrentLevel.num-1])):
@@ -291,21 +286,21 @@ def cos_menu(Screen):
     PEG_TEXT = get_font(50).render("Peg", True, "#b68f40")
     BALL_TEXT = get_font(50).render("Ball", True, "#b68f40")
 
-    RIGHT_BUTTON1 = Button(image=pygame.transform.scale(pygame.image.load("assets/right_button.png"), (100, 100)), pos=(725, 200),
+    RIGHT_BUTTON1 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/right_button.png")), (100, 100)), pos=(725, 200),
                            text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    LEFT_BUTTON1 = Button(image=pygame.transform.scale(pygame.image.load("assets/left_button.png"), (100, 100)), pos=(400, 200),
+    LEFT_BUTTON1 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/left_button.png")), (100, 100)), pos=(400, 200),
                           text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    RIGHT_BUTTON2 = Button(image=pygame.transform.scale(pygame.image.load("assets/right_button.png"), (100, 100)), pos=(725, 350),
+    RIGHT_BUTTON2 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/right_button.png")), (100, 100)), pos=(725, 350),
                            text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    LEFT_BUTTON2 = Button(image=pygame.transform.scale(pygame.image.load("assets/left_button.png"), (100, 100)), pos=(400, 350),
+    LEFT_BUTTON2 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/left_button.png")), (100, 100)), pos=(400, 350),
                           text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    RIGHT_BUTTON3 = Button(image=pygame.transform.scale(pygame.image.load("assets/right_button.png"), (100, 100)), pos=(725, 500),
+    RIGHT_BUTTON3 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/right_button.png")), (100, 100)), pos=(725, 500),
                            text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    LEFT_BUTTON3 = Button(image=pygame.transform.scale(pygame.image.load("assets/left_button.png"), (100, 100)), pos=(400, 500),
+    LEFT_BUTTON3 = Button(image=pygame.transform.scale(pygame.image.load(resource_path("assets/left_button.png")), (100, 100)), pos=(400, 500),
                           text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
-    PLAY_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 625),
+    PLAY_BUTTON = Button(image=pygame.image.load(resource_path("assets/Options Rect.png")), pos=(400, 625),
                          text_input="PLAY", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-    BACK_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 750),
+    BACK_BUTTON = Button(image=pygame.image.load(resource_path("assets/Options Rect.png")), pos=(400, 750),
                          text_input="BACK", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
 
     COS_RECT = COS_TEXT.get_rect(center=(400, 50))
@@ -323,57 +318,62 @@ def cos_menu(Screen):
 
     match CurrentBackground.num:
         case 1:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/space_background.jpg").convert(), (150, 150)), [500, 125])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/space_background.jpg")).convert(), (150, 150)), [500, 125])
             BackGround.IMAGE = Background(
                 'assets/space_background.jpg', [0, 0], 1.0)
         case 2:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/medieval_background.jpg").convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 2 BACKGROUND
-            BackGround.IMAGE = Background('assets/medieval_background.jpg', [0, 0], 800 / 1776)
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/medieval_background.jpg")).convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 2 BACKGROUND
+            BackGround.IMAGE = Background(
+                'assets/medieval_background.jpg', [0, 0], 800 / 1776)
         case 3:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/haunted_background.jpeg").convert(), (150, 150)), [500, 125])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/haunted_background.jpeg")).convert(), (150, 150)), [500, 125])
             BackGround.IMAGE = Background(
                 'assets/haunted_background.jpeg', [-8, 0], 0.56)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load("assets/city_background.jpg").convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 4 BACKGROUND
-            BackGround.IMAGE = Background('assets/city_background.jpg', [-250, 0], .7)
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/city_background.jpg")).convert(), (150, 150)), [500, 125])  # REPLACE WITH LEVEL 4 BACKGROUND
+            BackGround.IMAGE = Background(
+                'assets/city_background.jpg', [-250, 0], .7)
 
     match CurrentPeg.num:
         case 1:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/space_peg.png"), (150, 150)), [500, 275])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/space_peg.png")), (150, 150)), [500, 275])
             PegSurface.SURFACE = ball_look('assets/space_peg.png', 0.15)
         case 2:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/medieval_peg.png"), (150, 150)), [500, 275])  # REPLACE WITH LEVEL 2 PEG
-            PegSurface.SURFACE = ball_look('assets/medieval_peg.png', 60 / 812 * 2)
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/medieval_peg.png")), (150, 150)), [500, 275])  # REPLACE WITH LEVEL 2 PEG
+            PegSurface.SURFACE = ball_look(
+                'assets/medieval_peg.png', 60 / 812 * 2)
         case 3:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/haunted_peg.png"), (150, 150)), [500, 275])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/haunted_peg.png")), (150, 150)), [500, 275])
             PegSurface.SURFACE = ball_look('assets/haunted_peg.png', 0.40)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/city_peg.png"), (150, 150)), [500, 275])  # REPLACE WITH LEVEL 4 PEG
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/city_peg.png")), (150, 150)), [500, 275])  # REPLACE WITH LEVEL 4 PEG
             PegSurface.SURFACE = ball_look('assets/city_peg.png', 0.35)
 
     match CurrentBall.num:
         case 1:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/space_ball.png"), (150, 150)), [500, 425])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/space_ball.png")), (150, 150)), [500, 425])
             BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.075)
         case 2:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/medieval_ball.png"), (150, 150)), [500, 425])  # REPLACE WITH LEVEL 2 BALL
-            BallSurface.SURFACE = ball_look('assets/medieval_ball.png', 25 / 1439 * 2)
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/medieval_ball.png")), (150, 150)), [500, 425])  # REPLACE WITH LEVEL 2 BALL
+            BallSurface.SURFACE = ball_look(
+                'assets/medieval_ball.png', 25 / 1439 * 2)
         case 3:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/haunted_ball.png"), (150, 150)), [500, 425])
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/haunted_ball.png")), (150, 150)), [500, 425])
             BallSurface.SURFACE = ball_look('assets/haunted_ball.png', 0.15)
         case 4:
-            Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/city_ball.png"), (150, 150)), [500, 425])  # REPLACE WITH LEVEL 4 BALL
+            Screen.blit(pygame.transform.scale(pygame.image.load(resource_path(
+                "assets/city_ball.png")), (150, 150)), [500, 425])  # REPLACE WITH LEVEL 4 BALL
             BallSurface.SURFACE = ball_look('assets/city_ball.png', 0.06)
 
     for event in pygame.event.get():
