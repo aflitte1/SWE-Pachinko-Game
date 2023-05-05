@@ -81,9 +81,9 @@ def create_rectangle_static(space, pos_x, pos_y, width, height):
 
 
 def create_borders(space):
-    # create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
-    create_rectangle_static(space, -100, 400, 200, 800)  # left wall
-    create_rectangle_static(space, 899, 400, 200, 800)  # right wall
+    create_rectangle_static(space, 400, -100, 800, 200)  # ceiling
+    create_rectangle_static(space, -100, 400, 200, 1100)  # left wall
+    create_rectangle_static(space, 899, 400, 200, 1100)  # right wall
 
 
 def collide(Player, Balls):
