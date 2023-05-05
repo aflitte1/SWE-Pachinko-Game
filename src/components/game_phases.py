@@ -43,64 +43,27 @@ def draw_title(Screen, x_val):
     Screen.blit(pygame.transform.scale(pygame.image.load(
         "assets/arcade_cabinet_right.png"), (800, 800)), [0 + x_val, 0])
 
-    # NAME_REGISTRAITON_TEXT1 = get_font(30).render("ENTER", True, "#b68f40")
-    # NAME_REGISTRAITON_RECT1 = NAME_REGISTRAITON_TEXT1.get_rect(center=(400 - 75 - x_val, 400))
-    # NAME_REGISTRAITON_TEXT2 = get_font(30).render(" NAME", True, "#b68f40")
-    # NAME_REGISTRAITON_RECT2 = NAME_REGISTRAITON_TEXT2.get_rect(center=(400 + 75 + x_val, 400))
-
     match len(Username.name):
         case 0:
             pass
         case 1:
-            USER_NAME_TEXT1 = get_font(40).render(
-                Username.name + " ", True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT1 = USER_NAME_TEXT1.get_rect(
-                center=(400 - 40 - x_val, 500))
-            Screen.blit(USER_NAME_TEXT1, USER_NAME_RECT1)
+            draw_text(Screen, 400 - 40 - x_val, 500, Username.name + " ", "#b68f40", 40)
         case 2:
-            USER_NAME_TEXT1 = get_font(40).render(
-                Username.name, True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT1 = USER_NAME_TEXT1.get_rect(
-                center=(400 - 40 - x_val, 500))
-            Screen.blit(USER_NAME_TEXT1, USER_NAME_RECT1)
+            draw_text(Screen, 400 - 40 - x_val, 500, Username.name, "#b68f40", 40)
         case 3:
-            USER_NAME_TEXT1 = get_font(40).render(
-                Username.name[:2], True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT1 = USER_NAME_TEXT1.get_rect(
-                center=(400 - 40 - x_val, 500))
-            USER_NAME_TEXT2 = get_font(40).render(
-                Username.name[2] + " ", True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT2 = USER_NAME_TEXT2.get_rect(
-                center=(400 + 40 + x_val, 500))
-            Screen.blit(USER_NAME_TEXT1, USER_NAME_RECT1)
-            Screen.blit(USER_NAME_TEXT2, USER_NAME_RECT2)
+            draw_text(Screen, 400 - 40 - x_val, 500, Username.name[:2], "#b68f40", 40)
+            draw_text(Screen, 400 + 40 + x_val, 500, Username.name[2] + " ", "#b68f40", 40)
         case 4:
-            USER_NAME_TEXT1 = get_font(40).render(
-                Username.name[:2], True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT1 = USER_NAME_TEXT1.get_rect(
-                center=(400 - 40 - x_val, 500))
-            USER_NAME_TEXT2 = get_font(40).render(
-                Username.name[-2:], True, "#b68f40")  # NEED TO CHANGE THIS FOR SURE
-            USER_NAME_RECT2 = USER_NAME_TEXT2.get_rect(
-                center=(400 + 40 + x_val, 500))
-            Screen.blit(USER_NAME_TEXT1, USER_NAME_RECT1)
-            Screen.blit(USER_NAME_TEXT2, USER_NAME_RECT2)
-
-    # USER_NAME_slot_TEXT = get_font(40).render("____", True, "#b68f40")        ###### NEED TO CHANGE THIS FOR SURE
-    # USER_NAME_slot_RECT = USER_NAME_slot_TEXT.get_rect(center=(400, 510))
-    # Screen.blit(USER_NAME_slot_TEXT, USER_NAME_slot_RECT)
-
-    # Screen.blit(NAME_REGISTRAITON_TEXT1, NAME_REGISTRAITON_RECT1)
-    # Screen.blit(NAME_REGISTRAITON_TEXT2, NAME_REGISTRAITON_RECT2)
-
+            draw_text(Screen, 400 - 40 - x_val, 500, Username.name[:2], "#b68f40", 40)
+            draw_text(Screen, 400 + 40 + x_val, 500, Username.name[-2:], "#b68f40", 40)
 
 def main_menu_phase(Screen) -> None:
     MusicService.start_menu_music()
     BackGround.IMAGE = Background('assets/mm_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
-    MENU_TEXT = get_font(50).render("MAIN MENU", True, "#b68f40")
-    MENU_RECT = MENU_TEXT.get_rect(center=(400, 100))
+
+    draw_text(Screen, 400, 100, "MAIN MENU", "#b68f40", 50)
 
     LEVEL_SELECT_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 250),
                                  text_input="Level Select", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
@@ -108,7 +71,6 @@ def main_menu_phase(Screen) -> None:
                             text_input="OPTIONS", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(400, 550),
                          text_input="QUIT", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-    Screen.blit(MENU_TEXT, MENU_RECT)
 
     for button in [LEVEL_SELECT_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
         button.changeColor(MENU_MOUSE_POS)
@@ -133,7 +95,8 @@ def level_select_phase(Screen):
         'assets/level_select_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
-    LEVEL_SELECT_TEXT = get_font(50).render("Level Select", True, "#b68f40")
+
+    LEVEL_SELECT_TEXT = "Level Select"
 
     PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(400, 720),
                          text_input="PLAY", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
@@ -149,24 +112,23 @@ def level_select_phase(Screen):
 
     match CurrentLevel.num:
         case 1:
-            LEVEL_SELECT_TEXT = get_font(50).render("Level 1", True, "#b68f40")
+            LEVEL_SELECT_TEXT = "Level 1"
             Screen.blit(pygame.transform.scale(pygame.image.load(
                 "assets/space_background.jpg").convert(), (500, 500)), [150, 150])
         case 2:
-            LEVEL_SELECT_TEXT = get_font(50).render("Level 2", True, "#b68f40")
+            LEVEL_SELECT_TEXT = "Level 2"
             Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/medieval_background.jpg").convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 2 BACKGROUND
+                "assets/medieval_background.jpg").convert(), (500, 500)), [150, 150])
         case 3:
-            LEVEL_SELECT_TEXT = get_font(50).render("Level 3", True, "#b68f40")
+            LEVEL_SELECT_TEXT = "Level 3"
             Screen.blit(pygame.transform.scale(pygame.image.load(
                 "assets/haunted_background.jpeg").convert(), (500, 500)), [150, 150])
         case 4:
-            LEVEL_SELECT_TEXT = get_font(50).render("Level 4", True, "#b68f40")
+            LEVEL_SELECT_TEXT = "Level 4"
             Screen.blit(pygame.transform.scale(pygame.image.load(
-                "assets/city_background.jpg").convert(), (500, 500)), [150, 150])  # REPLACE WITH LEVEL 4 BACKGROUND
+                "assets/city_background.jpg").convert(), (500, 500)), [150, 150])
 
-    LEVEL_SELECT_RECT = LEVEL_SELECT_TEXT.get_rect(center=(400, 100))
-    Screen.blit(LEVEL_SELECT_TEXT, LEVEL_SELECT_RECT)
+    draw_text(Screen, 400, 100, LEVEL_SELECT_TEXT, "#b68f40", 50)
 
     for button in [PLAY_BUTTON, LEADERBOARD_BUTTON, RIGHT_BUTTON, LEFT_BUTTON, BACK_BUTTON]:
         button.changeColor(MENU_MOUSE_POS)
@@ -204,9 +166,8 @@ def leaderboard_phase(Screen):
         'assets/Leaderboard_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     MENU_MOUSE_POS = pygame.mouse.get_pos()
-    LEADERBOARD_TEXT = get_font(50).render("Leaderboard", True, "#b68f40")
-    LEVEL_SELECT_RECT = LEADERBOARD_TEXT.get_rect(center=(400, 100))
-    Screen.blit(LEADERBOARD_TEXT, LEVEL_SELECT_RECT)
+
+    draw_text(Screen, 400, 100, "Leaderboard", "#b68f40", 50)
 
     BACK_BUTTON = Button(image=pygame.transform.scale(pygame.image.load("assets/back_arrow.png"), (75, 75)), pos=(50, 50),
                          text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
@@ -214,21 +175,15 @@ def leaderboard_phase(Screen):
     for ii in range(len(scores[CurrentLevel.num-1])):
         display_string = format_leaderboard_display(
             scores[CurrentLevel.num-1][ii], ii)
-        DISPLAY_STRING_TEXT = get_font(25).render(
-            display_string, True, "#b68f40")
-        DISPLAY_STRING_RECT = DISPLAY_STRING_TEXT.get_rect(
-            center=(400, 150 + ii * 50))
-        Screen.blit(DISPLAY_STRING_TEXT, DISPLAY_STRING_RECT)
+
+        draw_text(Screen, 400, 150 + ii * 50, display_string, "#b68f40", 25)
+
     if (last_score[CurrentLevel.num - 1] != []):
         display_string = format_leaderboard_display(
             last_score[CurrentLevel.num - 1], -1)
-        LAST_SCORE_TEXT = get_font(40).render("Last Score", True, "#b68f40")
-        LAST_SCORE_RECT = LAST_SCORE_TEXT.get_rect(center=(400, 675))
-        DISPLAY_STRING_TEXT = get_font(25).render(
-            display_string, True, "#b68f40")
-        DISPLAY_STRING_RECT = DISPLAY_STRING_TEXT.get_rect(center=(400, 750))
-        Screen.blit(LAST_SCORE_TEXT, LAST_SCORE_RECT)
-        Screen.blit(DISPLAY_STRING_TEXT, DISPLAY_STRING_RECT)
+
+        draw_text(Screen, 400, 675, "Last Score", "#b68f40", 40)
+        draw_text(Screen, 400, 750, display_string, "#b68f40", 25)
 
     for button in [BACK_BUTTON]:
         button.changeColor(MENU_MOUSE_POS)
@@ -286,10 +241,11 @@ def cos_menu(Screen):
         'assets/level_select_background.jpg', [0, 0], 1.5)
     Screen.blit(BackGround.IMAGE.image, BackGround.IMAGE.rect)
     COS_MOUSE_POS = pygame.mouse.get_pos()
-    COS_TEXT = get_font(50).render("Cosmetics", True, "#b68f40")
-    BACKGROUND_TEXT = get_font(33).render("Background", True, "#b68f40")
-    PEG_TEXT = get_font(50).render("Peg", True, "#b68f40")
-    BALL_TEXT = get_font(50).render("Ball", True, "#b68f40")
+
+    draw_text(Screen, 400, 50, "Cosmetics", "#b68f40", 50)
+    draw_text(Screen, 175, 200, "Background", "#b68f40", 33)
+    draw_text(Screen, 200, 350, "Peg", "#b68f40", 50)
+    draw_text(Screen, 200, 500, "Ball", "#b68f40", 50)
 
     RIGHT_BUTTON1 = Button(image=pygame.transform.scale(pygame.image.load("assets/right_button.png"), (100, 100)), pos=(725, 200),
                            text_input="", font=get_font(1), base_color="#d7fcd4", hovering_color="White")
@@ -307,15 +263,6 @@ def cos_menu(Screen):
                          text_input="PLAY", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
     BACK_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(400, 750),
                          text_input="BACK", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
-
-    COS_RECT = COS_TEXT.get_rect(center=(400, 50))
-    BACKGROUND_RECT = BACKGROUND_TEXT.get_rect(center=(175, 200))
-    PEG_RECT = PEG_TEXT.get_rect(center=(200, 350))
-    BALL_RECT = BALL_TEXT.get_rect(center=(200, 500))
-    Screen.blit(COS_TEXT, COS_RECT)
-    Screen.blit(BACKGROUND_TEXT, BACKGROUND_RECT)
-    Screen.blit(PEG_TEXT, PEG_RECT)
-    Screen.blit(BALL_TEXT, BALL_RECT)
 
     for button in [RIGHT_BUTTON1, LEFT_BUTTON1, RIGHT_BUTTON2, LEFT_BUTTON2, RIGHT_BUTTON3, LEFT_BUTTON3, PLAY_BUTTON, BACK_BUTTON]:
         button.changeColor(COS_MOUSE_POS)
