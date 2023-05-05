@@ -93,7 +93,7 @@ def main():
                             (725, 500),
                         ),
                         size = 10,
-                        elastic = 0.5         
+                        elastic = 0.5
                     )
 
                     level_start = True
@@ -113,7 +113,7 @@ def main():
                     score += 1
 
             case bnd.GameStatus.LEVEL_2:
-                Space.gravity = (0, 100)
+                Space.gravity = (0, 120)
 
                 if not level_start:
                     level_start = True
@@ -121,10 +121,26 @@ def main():
                     ball_size = 25
                     peg_size = 20
 
-                    GamePhases.level_two(
-                        ball_size=ball_size, peg_size=peg_size)
+                    GamePhases.level_two(ball_size=ball_size, peg_size=peg_size)
 
-                    # Create pegs here
+                    spawn_pegs(
+                        pos_list = (
+                            (400, 100),
+                            (280, 150),
+                            (520, 150),
+                            (100, 300),
+                            (400, 300),
+                            (700, 300),
+                            (225, 400),
+                            (574, 400),
+                            (150, 500),
+                            (300, 500),
+                            (500, 500),
+                            (650, 500),
+                        ),
+                        size = peg_size,
+                        elastic = 0.65
+                    )
 
                 if ball_count <= ball_max:
                     spawn_ball = np.random.randint(0, 200)
