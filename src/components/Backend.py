@@ -120,19 +120,10 @@ def game_over(Screen, score, total):
     # MusicService.play_finish_sound()
 
     GAME_MOUSE_POS = pygame.mouse.get_pos()
-    GAME_TEXT = get_font(50).render("GAME OVER", True, "#b68f40")
-    GAME_RECT = GAME_TEXT.get_rect(center=(400, 100))
 
-    SCORE_WRD = get_font(50).render("SCORE", True, "#f5da0c")
-    SCORE_WRD_RECT = SCORE_WRD.get_rect(center=(400, 250))
-
-    SCORE_STR = str(score) + "/" + str(total)
-    SCORE_TEXT = get_font(50).render(SCORE_STR, True, "#f5da0c")
-    SCORE_RECT = SCORE_TEXT.get_rect(center=(400, 300))
-
-    Screen.blit(GAME_TEXT, GAME_RECT)
-    Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
-    Screen.blit(SCORE_TEXT, SCORE_RECT)
+    draw_text_outlined(Screen, 400, 100, "GAME OVER", "#b68f40", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 250, "SCORE", "#f5da0c", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 300, str(score) + "/" + str(total), "#f5da0c", 50, "#000000", 2)
 
     if (UpdateLeaderboardBool.update):
         update_leaderboard(CurrentLevel.num, str(score), Username.name)
@@ -207,6 +198,94 @@ class CurrentPeg():
 class CurrentBall():
     num = 1
 
+class CosPeg():
+    size = 1
+
+class CosBall():
+    size = 1
+
+def CosPegLayout(num):
+    match num:
+        case 1:
+            peg_list = (
+                (125, 200),
+                (225, 300),
+                (175, 450),
+                (325, 350),
+                (125, 350),
+                (275, 650),
+                (200, 550),
+                (75, 500),
+                # Mid
+                (400, 500),
+                # Left side
+                (675, 200),
+                (575, 300),
+                (625, 450),
+                (475, 350),
+                (675, 350),
+                (525, 650),
+                (600, 550),
+                (725, 500),
+            )
+        case 2:
+            peg_list = (
+                (400, 100),
+                (280, 150),
+                (520, 150),
+                (100, 300),
+                (400, 300),
+                (700, 300),
+                (225, 400),
+                (574, 400),
+                (150, 500),
+                (300, 500),
+                (500, 500),
+                (650, 500),
+            )
+        case 3:
+            peg_list = (
+                (400, 100),
+                (280, 150),
+                (520, 150),
+                (75, 300),
+                (150, 225),
+                (150, 375),
+                (225, 300),
+                (400, 300),
+                (575, 300),
+                (650, 225),
+                (650, 375),
+                (725, 300),
+                (225, 475),
+                (574, 475),
+                (150, 575),
+                (300, 575),
+                (500, 575),
+                (650, 575),
+            )
+        case 4:
+            peg_list = (
+                (125, 200),
+                (225, 300),
+                (325, 350),
+                (125, 350),
+                (275, 650),
+                (200, 550),
+
+                (325, 225),
+                (400, 200),
+                (475, 225),
+
+                # Left side
+                (675, 200),
+                (575, 300),
+                (475, 350),
+                (675, 350),
+                (525, 650),
+                (600, 550),
+            )
+    return peg_list
 
 class GlobalState:
     GAME_STATE = GameStatus.TITLE_SCREEN
@@ -231,6 +310,18 @@ class PegSurface:
 def get_font(size):
     return pygame.font.Font("assets/font.ttf", size)
 
+def draw_text(screen, x, y, string, color, size):
+    text = get_font(size).render(string, True, color)
+    textbox = text.get_rect(center = (x, y))
+    screen.blit(text, textbox)
+
+def draw_text_outlined(screen, x, y, string, text_color, text_size, outline_color, outline_size):
+    draw_text(screen, x + outline_size, y + outline_size, string, outline_color, text_size)
+    draw_text(screen, x + outline_size, y - outline_size, string, outline_color, text_size)
+    draw_text(screen, x - outline_size, y + outline_size, string, outline_color, text_size)
+    draw_text(screen, x - outline_size, y - outline_size, string, outline_color, text_size)
+    
+    draw_text(screen, x, y, string, text_color, text_size)
 
 class Button():
     def __init__(self, image, pos, text_input, font, base_color, hovering_color):
