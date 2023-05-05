@@ -254,7 +254,10 @@ def main():
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
-                        ball_sprite = bnd.Ball(ball_pos, Space, 43, 1)
+                        if bnd.CurrentBall.num not in {2, 4}:
+                            ball_sprite = bnd.Ball(ball_pos, Space, 43, 1)
+                        else:
+                           ball_sprite = bnd.Ball(ball_pos, Space, 25.8, 1) 
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
