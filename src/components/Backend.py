@@ -121,9 +121,9 @@ def game_over(Screen, score, total):
 
     GAME_MOUSE_POS = pygame.mouse.get_pos()
 
-    draw_text(Screen, 400, 100, "GAME OVER", "#b68f40", 50)
-    draw_text(Screen, 400, 250, "SCORE", "#f5da0c", 50)
-    draw_text(Screen, 400, 300, str(score) + "/" + str(total), "#f5da0c", 50)
+    draw_text_outlined(Screen, 400, 100, "GAME OVER", "#b68f40", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 250, "SCORE", "#f5da0c", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 300, str(score) + "/" + str(total), "#f5da0c", 50, "#000000", 2)
 
     if (UpdateLeaderboardBool.update):
         update_leaderboard(CurrentLevel.num, str(score), Username.name)
