@@ -162,14 +162,26 @@ def main():
                     GamePhases.level_three()
                     spawn_pegs(
                         pos_list = (
-                            (465, 450),
-                            (310, 600),
-                            (130, 400),
-                            (665, 550),
-                            (325, 225),
-                            (625, 250),
+                            (400, 100),
+                            (280, 150),
+                            (520, 150),
+                            (75, 300),
+                            (150, 225),
+                            (150, 375),
+                            (225, 300),
+                            (400, 300),
+                            (575, 300),
+                            (650, 225),
+                            (650, 375),
+                            (725, 300),
+                            (225, 475),
+                            (574, 475),
+                            (150, 575),
+                            (300, 575),
+                            (500, 575),
+                            (650, 575),
                         ),
-                        size = 43,
+                        size = 25,
                         elastic = 0.5
                     )
 
@@ -181,7 +193,7 @@ def main():
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
-                        ball_sprite = bnd.Ball(ball_pos, Space, 43, 1)
+                        ball_sprite = bnd.Ball(ball_pos, Space, 20, 1)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
@@ -240,12 +252,11 @@ def main():
             case bnd.GameStatus.COS_LEVEL:
                 Space.gravity = (0, 200)
                 if not level_start:
-                    Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (665, 550), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (325, 225), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (625, 250), 43, 0.5))
+                    spawn_pegs(
+                        pos_list = bnd.CosPegLayout(num=bnd.CurrentPeg.num),
+                        size = bnd.CosPeg.size,
+                        elastic = 0.5
+                    )
                     level_start = True
 
                 if ball_count <= ball_max:
@@ -253,10 +264,7 @@ def main():
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
                             ball_pos += 180
-                        if bnd.CurrentBall.num not in {2, 4}:
-                            ball_sprite = bnd.Ball(ball_pos, Space, 43, 1)
-                        else:
-                           ball_sprite = bnd.Ball(ball_pos, Space, 25.8, 1) 
+                        ball_sprite = bnd.Ball(ball_pos, Space, bnd.CosBall.size, 1)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
@@ -279,6 +287,9 @@ def main():
 
             bnd.draw_text_outlined(Screen, 740, 50, "Score", "#b68f40", 20, "#000000", 2)
             bnd.draw_text_outlined(Screen, 750, 90, str(score), "#b68f40", 30, "#000000", 2)
+
+            #bnd.draw_text(Screen, 740, 50, "Score", "#b68f40", 20)
+            #bnd.draw_text(Screen, 750, 90, str(score), "#b68f40", 30)
 
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
