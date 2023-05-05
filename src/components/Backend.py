@@ -120,19 +120,10 @@ def game_over(Screen, score, total):
     # MusicService.play_finish_sound()
 
     GAME_MOUSE_POS = pygame.mouse.get_pos()
-    GAME_TEXT = get_font(50).render("GAME OVER", True, "#b68f40")
-    GAME_RECT = GAME_TEXT.get_rect(center=(400, 100))
 
-    SCORE_WRD = get_font(50).render("SCORE", True, "#f5da0c")
-    SCORE_WRD_RECT = SCORE_WRD.get_rect(center=(400, 250))
-
-    SCORE_STR = str(score) + "/" + str(total)
-    SCORE_TEXT = get_font(50).render(SCORE_STR, True, "#f5da0c")
-    SCORE_RECT = SCORE_TEXT.get_rect(center=(400, 300))
-
-    Screen.blit(GAME_TEXT, GAME_RECT)
-    Screen.blit(SCORE_WRD, SCORE_WRD_RECT)
-    Screen.blit(SCORE_TEXT, SCORE_RECT)
+    draw_text_outlined(Screen, 400, 100, "GAME OVER", "#b68f40", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 250, "SCORE", "#f5da0c", 50, "#000000", 2)
+    draw_text_outlined(Screen, 400, 300, str(score) + "/" + str(total), "#f5da0c", 50, "#000000", 2)
 
     if (UpdateLeaderboardBool.update):
         update_leaderboard(CurrentLevel.num, str(score), Username.name)
@@ -231,6 +222,18 @@ class PegSurface:
 def get_font(size):
     return pygame.font.Font("assets/font.ttf", size)
 
+def draw_text(screen, x, y, string, color, size):
+    text = get_font(size).render(string, True, color)
+    textbox = text.get_rect(center = (x, y))
+    screen.blit(text, textbox)
+
+def draw_text_outlined(screen, x, y, string, text_color, text_size, outline_color, outline_size):
+    draw_text(screen, x + outline_size, y + outline_size, string, outline_color, text_size)
+    draw_text(screen, x + outline_size, y - outline_size, string, outline_color, text_size)
+    draw_text(screen, x - outline_size, y + outline_size, string, outline_color, text_size)
+    draw_text(screen, x - outline_size, y - outline_size, string, outline_color, text_size)
+    
+    draw_text(screen, x, y, string, text_color, text_size)
 
 class Button():
     def __init__(self, image, pos, text_input, font, base_color, hovering_color):
