@@ -33,6 +33,11 @@ def update_game_display():
 
 
 def main():
+    # Helper function to spawn all pegs in a level
+    def spawn_pegs(pos_list, size, elastic):
+        for pos in pos_list:
+            Pegs.append(bnd.create_peg(Space, pos, size, elastic))
+
     Balls = []
     Pegs = []
     ball_max = 29
@@ -64,26 +69,34 @@ def main():
                 Space.gravity = (0, 80)
                 if not level_start:
                     GamePhases.level_one()
-                    # Right side
-                    Pegs.append(bnd.create_peg(Space, (125, 200), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (225, 300), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (175, 450), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (325, 350), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (125, 350), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (275, 650), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (200, 550), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (75, 500), 10, 0.5))
-                    # Mid
-                    Pegs.append(bnd.create_peg(Space, (400, 500), 10, 0.5))
-                    # Left side
-                    Pegs.append(bnd.create_peg(Space, (675, 200), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (575, 300), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (625, 450), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (475, 350), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (675, 350), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (525, 650), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (725, 500), 10, 0.5))
+
+                    spawn_pegs(
+                        pos_list = (
+                            # Right side
+                            (125, 200),
+                            (225, 300),
+                            (175, 450),
+                            (325, 350),
+                            (125, 350),
+                            (275, 650),
+                            (200, 550),
+                            (75, 500),
+                            # Mid
+                            (400, 500),
+                            # Left side
+                            (675, 200),
+                            (575, 300),
+                            (625, 450),
+                            (475, 350),
+                            (675, 350),
+                            (525, 650),
+                            (600, 550),
+                            (725, 500),
+                        ),
+                        size = 10,
+                        elastic = 0.5         
+                    )
+
                     level_start = True
                     bnd.UpdateLeaderboardBool.update = True
 
@@ -114,51 +127,14 @@ def main():
                     GamePhases.level_two(
                         ball_size=ball_size, peg_size=peg_size)
 
-                    # Right side
-                    Pegs.append(bnd.create_peg(
-                        Space, (125, 200), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (225, 300), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (175, 450), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (325, 350), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (125, 350), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (275, 650), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (200, 550), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (75, 500), peg_size, 0.5))
-                    # Mid
-                    Pegs.append(bnd.create_peg(
-                        Space, (400, 500), peg_size, 0.5))
-                    # Left side
-                    Pegs.append(bnd.create_peg(
-                        Space, (675, 200), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (575, 300), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (625, 450), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (475, 350), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (675, 350), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (525, 650), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (600, 550), peg_size, 0.5))
-                    Pegs.append(bnd.create_peg(
-                        Space, (725, 500), peg_size, 0.5))
                     # Create pegs here
 
                 if ball_count <= ball_max:
-                    spawn_ball = np.random.randint(0, 250)
+                    spawn_ball = np.random.randint(0, 200)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
                         ball_sprite = bnd.Ball(
-                            x_pos, Space, ball_size, 1)  # TODO change to 1
+                            x_pos, Space, ball_size, 1)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
@@ -172,12 +148,19 @@ def main():
                 Space.gravity = (0, 200)
                 if not level_start:
                     GamePhases.level_three()
-                    Pegs.append(bnd.create_peg(Space, (465, 450), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (310, 600), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (130, 400), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (665, 550), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (325, 225), 43, 0.5))
-                    Pegs.append(bnd.create_peg(Space, (625, 250), 43, 0.5))
+                    spawn_pegs(
+                        pos_list = (
+                            (465, 450),
+                            (310, 600),
+                            (130, 400),
+                            (665, 550),
+                            (325, 225),
+                            (625, 250),
+                        ),
+                        size = 43,
+                        elastic = 0.5
+                    )
+
                     level_start = True
                     bnd.UpdateLeaderboardBool.update = True
 
@@ -201,25 +184,32 @@ def main():
                 Space.gravity = (0, 400)
                 if not level_start:
                     GamePhases.level_four()
-                    # Right side
-                    Pegs.append(bnd.create_peg(Space, (125, 200), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (225, 300), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (325, 350), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (125, 350), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (275, 650), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (200, 550), 10, 0.1))
 
-                    Pegs.append(bnd.create_peg(Space, (325, 225), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (400, 200), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (475, 225), 10, 0.1))
+                    spawn_pegs(
+                        pos_list = (
+                            # Right side
+                            (125, 200),
+                            (225, 300),
+                            (325, 350),
+                            (125, 350),
+                            (275, 650),
+                            (200, 550),
 
-                    # Left side
-                    Pegs.append(bnd.create_peg(Space, (675, 200), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (575, 300), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (475, 350), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (675, 350), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (525, 650), 10, 0.1))
-                    Pegs.append(bnd.create_peg(Space, (600, 550), 10, 0.1))
+                            (325, 225),
+                            (400, 200),
+                            (475, 225),
+
+                            # Left side
+                            (675, 200),
+                            (575, 300),
+                            (475, 350),
+                            (675, 350),
+                            (525, 650),
+                            (600, 550),
+                        ),
+                        size = 10,
+                        elastic = 0.1
+                    )
 
                     level_start = True
                     bnd.UpdateLeaderboardBool.update = True
@@ -298,7 +288,6 @@ def main():
                     Balls.remove(ball)
                     # del ball
         update_game_display()
-
 
 if __name__ == "__main__":
     main()
