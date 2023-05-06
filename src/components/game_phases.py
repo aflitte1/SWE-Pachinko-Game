@@ -314,7 +314,7 @@ def cos_menu(Screen):
             Screen.blit(pygame.transform.scale(pygame.image.load(
                 "assets/space_ball.png"), (150, 150)), [500, 425])
             BallSurface.SURFACE = ball_look('assets/space_ball.png', 0.05)
-            CosBall.size = 26.6
+            CosBall.size = 25
         case 2:
             Screen.blit(pygame.transform.scale(pygame.image.load(
                 "assets/medieval_ball.png"), (150, 150)), [500, 425])  # REPLACE WITH LEVEL 2 BALL
