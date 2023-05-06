@@ -90,7 +90,7 @@ def main():
                             (675, 350),
                             (525, 650),
                             (600, 550),
-                            (725, 500),
+                            (725, 500), 
                         ),
                         size = 10,
                         elastic = 0.5
@@ -103,7 +103,7 @@ def main():
                     spawn_ball = np.random.randint(0, 125)
                     if spawn_ball == 0:
                         x_pos = np.random.uniform(20, 780)
-                        ball_sprite = bnd.Ball(x_pos, Space, 26.6, 2)
+                        ball_sprite = bnd.Ball(x_pos, Space, 26.6, 1.5)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
                         ball_count += 1
