@@ -162,24 +162,24 @@ def main():
                     GamePhases.level_three()
                     spawn_pegs(
                         pos_list = (
-                            (400, 100),
-                            (280, 150),
-                            (520, 150),
-                            (75, 300),
-                            (150, 225),
-                            (150, 375),
-                            (225, 300),
-                            (400, 300),
-                            (575, 300),
-                            (650, 225),
-                            (650, 375),
-                            (725, 300),
-                            (225, 475),
-                            (574, 475),
-                            (150, 575),
-                            (300, 575),
-                            (500, 575),
-                            (650, 575),
+                            (395, 100),
+                            (275, 150),
+                            (515, 150),
+                            (70, 300),
+                            (145, 225),
+                            (145, 375),
+                            (220, 300),
+                            (395, 300),
+                            (570, 300),
+                            (645, 225),
+                            (645, 375),
+                            (720, 300),
+                            (220, 475),
+                            (569, 475),
+                            (145, 575),
+                            (295, 575),
+                            (495, 575),
+                            (645, 575),
                         ),
                         size = 25,
                         elastic = 0.5
@@ -192,7 +192,7 @@ def main():
                     spawn_ball = np.random.randint(0, 75)
                     if spawn_ball == 0:
                         if ball_count % 10 == 0:
-                            ball_pos += 180
+                            ball_pos += 120
                         ball_sprite = bnd.Ball(ball_pos, Space, 20, 1)
                         Balls.append(ball_sprite)
                         all_balls.add(ball_sprite)
@@ -285,11 +285,11 @@ def main():
             P1.move()
             P1.draw(Screen)
 
-            bnd.draw_text_outlined(Screen, 740, 50, "Score", "#b68f40", 20, "#000000", 2)
-            bnd.draw_text_outlined(Screen, 750, 90, str(score), "#b68f40", 30, "#000000", 2)
+            #bnd.draw_text_outlined(Screen, 740, 50, "Score", "#b68f40", 20, "#000000", 2)
+            #bnd.draw_text_outlined(Screen, 750, 90, str(score), "#b68f40", 30, "#000000", 2)
 
-            #bnd.draw_text(Screen, 740, 50, "Score", "#b68f40", 20)
-            #bnd.draw_text(Screen, 750, 90, str(score), "#b68f40", 30)
+            bnd.draw_text(Screen, 740, 50, "Score", "#b68f40", 20)
+            bnd.draw_text(Screen, 750, 90, str(score), "#b68f40", 30)
 
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
