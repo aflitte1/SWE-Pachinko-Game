@@ -285,11 +285,8 @@ def main():
             P1.move()
             P1.draw(Screen)
 
-            #bnd.draw_text_outlined(Screen, 740, 50, "Score", "#b68f40", 20, "#000000", 2)
-            #bnd.draw_text_outlined(Screen, 750, 90, str(score), "#b68f40", 30, "#000000", 2)
-
-            bnd.draw_text(Screen, 740, 50, "Score", "#b68f40", 20)
-            bnd.draw_text(Screen, 750, 90, str(score), "#b68f40", 30)
+            bnd.draw_text_outlined(Screen, 740, 50, "Score", "#b68f40", 20, "#000000", 2)
+            bnd.draw_text_outlined(Screen, 750, 90, str(score), "#b68f40", 30, "#000000", 2)
 
             if (ball_count == ball_max+1) & (len(Balls) == 0):
                 if (bnd.game_over(Screen, score, ball_count)):
